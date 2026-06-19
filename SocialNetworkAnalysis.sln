@@ -3,7 +3,37 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.13.35919.96 d17.13
 MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SocialNetworkAnalysis.Core", "SocialNetworkAnalysis.Core\SocialNetworkAnalysis.Core.csproj", "{DFEABABC-2DF0-435E-8160-54A7C3341123}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SocialNetworkAnalysis.Application", "SocialNetworkAnalysis.Application\SocialNetworkAnalysis.Application.csproj", "{2380ADA1-78EA-4B3C-AC29-442EDB74E34E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SocialNetworkAnalysis.Infrastructure", "SocialNetworkAnalysis.Infrastructure\SocialNetworkAnalysis.Infrastructure.csproj", "{F71EB327-95E8-4631-B59B-21BB8C1F6193}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SocialNetworkAnalysis.Presentation", "SocialNetworkAnalysis.Presentation\SocialNetworkAnalysis.Presentation.csproj", "{6B66E28E-8987-46CF-A44A-BEC8EF2A5B8E}"
+EndProject
 Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{DFEABABC-2DF0-435E-8160-54A7C3341123}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DFEABABC-2DF0-435E-8160-54A7C3341123}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DFEABABC-2DF0-435E-8160-54A7C3341123}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DFEABABC-2DF0-435E-8160-54A7C3341123}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2380ADA1-78EA-4B3C-AC29-442EDB74E34E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2380ADA1-78EA-4B3C-AC29-442EDB74E34E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2380ADA1-78EA-4B3C-AC29-442EDB74E34E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2380ADA1-78EA-4B3C-AC29-442EDB74E34E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F71EB327-95E8-4631-B59B-21BB8C1F6193}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F71EB327-95E8-4631-B59B-21BB8C1F6193}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F71EB327-95E8-4631-B59B-21BB8C1F6193}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F71EB327-95E8-4631-B59B-21BB8C1F6193}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6B66E28E-8987-46CF-A44A-BEC8EF2A5B8E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6B66E28E-8987-46CF-A44A-BEC8EF2A5B8E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6B66E28E-8987-46CF-A44A-BEC8EF2A5B8E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6B66E28E-8987-46CF-A44A-BEC8EF2A5B8E}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
