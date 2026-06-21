@@ -51,9 +51,12 @@ namespace SocialNetworkAnalysis.Core.Algorithms
         {
             if (startNodeId == targetNodeId)
             {
-                return new ShortestPathResult 
-                { 
-                    IsPathExist = false
+                List<int> p = new();
+                p.Add(startNodeId);
+                return new ShortestPathResult
+                {
+                    IsPathExist = true,
+                    Path = p
                 };
             }
       
