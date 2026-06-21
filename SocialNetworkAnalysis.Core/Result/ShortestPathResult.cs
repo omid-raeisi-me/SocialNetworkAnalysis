@@ -8,7 +8,7 @@ namespace SocialNetworkAnalysis.Core.Result
 {
     public class ShortestPathResult
     {
-        public bool IsPathexist { get; set; }
+        public bool IsPathExist { get; set; }
         public List<int> Path { get; set; } = new();
     }
 }

@@ -9,7 +9,5 @@ namespace SocialNetworkAnalysis.Core.Result
     public class BFSResult
     {
         public List<int> VisitedNodes { get; set; } = new();
-
-        public Dictionary<int, int> ParentMap { get; init; } = new();
     }
 }

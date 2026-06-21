@@ -14,7 +14,6 @@ namespace SocialNetworkAnalysis.Core.Algorithms
             HashSet<int> visitedSet = new();
             List<int> resultList = new();
             Queue<int> nodesQueue = new();
-            Dictionary<int, int> parentMapDictionary = new();
             nodesQueue.Enqueue(startNodeId);
 
             while (nodesQueue.Count > 0)
@@ -33,16 +32,11 @@ namespace SocialNetworkAnalysis.Core.Algorithms
                     if (!(visitedSet.Contains(neighbor)))
                     { 
                         nodesQueue.Enqueue(neighbor);
-                        if (!parentMapDictionary.ContainsKey(neighbor))
-                        {
-                            parentMapDictionary.Add(neighbor, currentNodeId);
-                        }
                     }
                 }
             }
             BFSResult result = new() {
-                VisitedNodes = resultList,
-                ParentMap = parentMapDictionary
+                VisitedNodes = resultList
             };
             
             return result;

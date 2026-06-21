@@ -8,37 +8,80 @@ namespace SocialNetworkAnalysis.Core.Algorithms
 {
     internal class ShortestPath : IShortestPath
     {
-        public ShortestPathResult Execute(SocialGraph graph,int startNodeId, int targetNodeId)
+        public Dictionary<int,int> ShortestPathBFS(SocialGraph graph, int startNodeId, int targetNodeId)
         {
+            HashSet<int> visitedSet = new();
+            Queue<int> nodesQueue = new();
+            Dictionary<int, int> parentMapDictionary = new();
+            nodesQueue.Enqueue(startNodeId);
+            bool targetFound = false;
 
-            BFS bfsExecuter = new();
-            BFSResult bfsResult = bfsExecuter.Execute(graph,startNodeId);
-            if (!(bfsResult.VisitedNodes.Contains(targetNodeId)))
+            while (nodesQueue.Count > 0 && !targetFound)
             {
-                ShortestPathResult resultWithoutPath = new()
+                int currentNodeId = nodesQueue.Dequeue();
+                if (visitedSet.Contains(currentNodeId))
                 {
-                    IsPathexist = false
-                };
-                return resultWithoutPath;
+                    continue;
+                }
+                visitedSet.Add(currentNodeId);
+
+                IEnumerable<int> neighbors = graph.GetFriends(currentNodeId);
+                foreach (int neighbor in neighbors)
+                {
+                    if (!(visitedSet.Contains(neighbor)))
+                    {
+                        nodesQueue.Enqueue(neighbor);
+                        if (!parentMapDictionary.ContainsKey(neighbor))
+                        {
+                            parentMapDictionary.Add(neighbor, currentNodeId);
+                        }
+                        if (neighbor == targetNodeId)
+                        {
+                            targetFound = true;
+                            break;
+                        }
+                    }
+                    
+                }
             }
-            
+            return parentMapDictionary;
+        }
+
+        public ShortestPathResult Execute(SocialGraph graph, int startNodeId, int targetNodeId)
+        {
+            if (startNodeId == targetNodeId)
+            {
+                return new ShortestPathResult 
+                { 
+                    IsPathExist = false
+                };
+            }
+      
+            Dictionary<int,int> ParentDictionary = ShortestPathBFS(graph, startNodeId, targetNodeId);
+            if (!ParentDictionary.ContainsKey(targetNodeId))
+            {
+                return new ShortestPathResult 
+                { 
+                    IsPathExist = false 
+                };
+            }
+
             List<int> path = new();
             int currentNodeId = targetNodeId;
             while (currentNodeId != startNodeId)
             {
                 path.Add(currentNodeId);
-                currentNodeId = bfsResult.ParentMap[currentNodeId];
+                currentNodeId = ParentDictionary[currentNodeId];
             }
             path.Add(startNodeId);
 
-            ShortestPathResult resultWithPath = new()
+            path.Reverse();
+
+            return new ShortestPathResult
             {
-                IsPathexist = true,
+                IsPathExist = true,
                 Path = path
             };
-            return resultWithPath;
-
-
         }
     }
 }
