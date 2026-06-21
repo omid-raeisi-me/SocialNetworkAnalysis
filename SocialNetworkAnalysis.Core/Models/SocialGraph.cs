@@ -64,5 +64,15 @@ namespace SocialNetworkAnalysis.Core.Models
         {
             return _adjacency[userId];
         }
+
+        public IEnumerable<int> GetAllNodes()
+        {
+            List<int> nodesId = new List<int>();
+            foreach (int userId in _users.Keys)
+            { 
+                nodesId.Add(userId);
+            }
+            return nodesId;
+        }
     }
 }
