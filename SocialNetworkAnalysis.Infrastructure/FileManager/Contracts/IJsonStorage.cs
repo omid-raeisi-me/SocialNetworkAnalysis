@@ -8,7 +8,7 @@ namespace SocialNetworkAnalysis.Infrastructure.FileManager.Contracts
 {
     public interface IJsonStorage<T>
     {
-        Task<T> ReadAsync(CancellationToken cancellationToken);
-        Task WriteAsync(T data, CancellationToken cancellationToken);
+        Task<T> ReadAsync();
+        Task WriteAsync(T data);
     }
 }

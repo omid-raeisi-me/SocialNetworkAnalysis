@@ -12,14 +12,14 @@ namespace SocialNetworkAnalysis.Infrastructure.FileManager.Services
 {
     public class JsonStorage<T> : IJsonStorage<T>
     {
-        private readonly string _filePath;
+        private string _filePath;
 
         public JsonStorage(string filePath)
         {
             _filePath = filePath;
         }
 
-        public async Task<T> ReadAsync(CancellationToken cancellationToken)
+        public async Task<T> ReadAsync()
         {
             if (!File.Exists(_filePath))
                 return default;
@@ -32,10 +32,10 @@ namespace SocialNetworkAnalysis.Infrastructure.FileManager.Services
                 bufferSize: 4096,
                 useAsync: true);
 
-            return await JsonSerializer.DeserializeAsync<T>(stream, cancellationToken: cancellationToken);
+            return await JsonSerializer.DeserializeAsync<T>(stream);
         }
 
-        public async Task WriteAsync(T data, CancellationToken cancellationToken)
+        public async Task WriteAsync(T data)
         {
             await using var stream = new FileStream(
                 _filePath,
@@ -48,8 +48,7 @@ namespace SocialNetworkAnalysis.Infrastructure.FileManager.Services
             await JsonSerializer.SerializeAsync<T>(
                 stream,
                 data,
-                new JsonSerializerOptions { WriteIndented = true },
-                cancellationToken);
+                new JsonSerializerOptions { WriteIndented = true });
         }
     }
 }
