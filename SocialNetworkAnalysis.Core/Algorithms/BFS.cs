@@ -14,28 +14,27 @@ namespace SocialNetworkAnalysis.Core.Algorithms
             HashSet<int> visitedSet = new();
             List<int> resultList = new();
             Queue<int> nodesQueue = new();
-            nodesQueue.Enqueue(startNodeId);
 
-            while (nodesQueue.Count > 0)
-            { 
+            nodesQueue.Enqueue(startNodeId);
+            visitedSet.Add(startNodeId);
+            while (nodesQueue.Count > 0) 
+            {
                 int currentNodeId = nodesQueue.Dequeue();
-                if (visitedSet.Contains(currentNodeId))
-                {
-                    continue;
-                }
-                visitedSet.Add(currentNodeId);
                 resultList.Add(currentNodeId);
 
                 IEnumerable<int> neighbors = graph.GetFriends(currentNodeId);
                 foreach (int neighbor in neighbors)
                 {
-                    if (!(visitedSet.Contains(neighbor)))
-                    { 
+                    if (!visitedSet.Contains(neighbor))
+                    {
+                        visitedSet.Add(neighbor);
                         nodesQueue.Enqueue(neighbor);
                     }
                 }
             }
-            BFSResult result = new() {
+
+            BFSResult result = new() 
+            {
                 VisitedNodes = resultList
             };
             

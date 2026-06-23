@@ -13,37 +13,38 @@ namespace SocialNetworkAnalysis.Core.Algorithms
             HashSet<int> visitedSet = new();
             Queue<int> nodesQueue = new();
             Dictionary<int, int> parentMapDictionary = new();
+
             nodesQueue.Enqueue(startNodeId);
+            visitedSet.Add(startNodeId); 
+
             bool targetFound = false;
 
             while (nodesQueue.Count > 0 && !targetFound)
             {
                 int currentNodeId = nodesQueue.Dequeue();
-                if (visitedSet.Contains(currentNodeId))
-                {
-                    continue;
-                }
-                visitedSet.Add(currentNodeId);
 
                 IEnumerable<int> neighbors = graph.GetFriends(currentNodeId);
                 foreach (int neighbor in neighbors)
                 {
-                    if (!(visitedSet.Contains(neighbor)))
+                    if (!visitedSet.Contains(neighbor))
                     {
+                        visitedSet.Add(neighbor); 
                         nodesQueue.Enqueue(neighbor);
+
                         if (!parentMapDictionary.ContainsKey(neighbor))
                         {
                             parentMapDictionary.Add(neighbor, currentNodeId);
                         }
+
                         if (neighbor == targetNodeId)
                         {
                             targetFound = true;
                             break;
                         }
                     }
-                    
                 }
             }
+
             return parentMapDictionary;
         }
 

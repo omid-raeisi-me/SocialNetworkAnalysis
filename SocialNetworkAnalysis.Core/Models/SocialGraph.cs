@@ -7,8 +7,8 @@ namespace SocialNetworkAnalysis.Core.Models
 {
     public class SocialGraph
     {
-        private Dictionary<int, string> _users;
-        private Dictionary<int, HashSet<int>> _adjacency;
+        private Dictionary<int, string> _users = new();
+        private Dictionary<int, HashSet<int>> _adjacency = new();
 
         public void AddUser(int userId, string name)
         {
@@ -67,12 +67,7 @@ namespace SocialNetworkAnalysis.Core.Models
 
         public IEnumerable<int> GetAllNodes()
         {
-            List<int> nodesId = new List<int>();
-            foreach (int userId in _users.Keys)
-            { 
-                nodesId.Add(userId);
-            }
-            return nodesId;
+            return _users.Keys;
         }
     }
 }
