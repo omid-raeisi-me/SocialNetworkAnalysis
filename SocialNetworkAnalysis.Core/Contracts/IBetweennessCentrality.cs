@@ -6,8 +6,8 @@ using System.Threading.Tasks;
 
 namespace SocialNetworkAnalysis.Core.Contracts
 {
-    public interface IShortestPath
+    public interface IBetweennessCentrality
     {
-        ShortestPathResult Execute(SocialGraph graph, int startNodeId, int targetNodeId);
+        BetweennessCentralityResult Execute(SocialGraph graph);
     }
 }

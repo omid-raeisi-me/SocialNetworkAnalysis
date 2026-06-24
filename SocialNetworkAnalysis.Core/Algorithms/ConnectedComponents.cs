@@ -9,7 +9,7 @@ using SocialNetworkAnalysis.Core.Result;
 
 namespace SocialNetworkAnalysis.Core.Algorithms
 {
-    internal class ConnectedComponents : IConnectedComponents
+    public class ConnectedComponents : IConnectedComponents
     {
         public ConnectedComponentsResult Execute(SocialGraph graph)
         {

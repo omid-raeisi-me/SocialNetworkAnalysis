@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace SocialNetworkAnalysis.Core.Algorithms
 {
-    internal class BFS : IBFS
+    public class BFS : IBFS
     {
         public BFSResult Execute(SocialGraph graph, int startNodeId)
         {

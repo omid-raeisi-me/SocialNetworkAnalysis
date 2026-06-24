@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 
 namespace SocialNetworkAnalysis.Core.Algorithms
 {
-    internal class ShortestPath : IShortestPath
+    public class ShortestPath : IShortestPath
     {
-        public Dictionary<int,int> ShortestPathBFS(SocialGraph graph, int startNodeId, int targetNodeId)
+        private Dictionary<int,int> ShortestPathBFS(SocialGraph graph, int startNodeId, int targetNodeId)
         {
             HashSet<int> visitedSet = new();
             Queue<int> nodesQueue = new();

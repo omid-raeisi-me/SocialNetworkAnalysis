@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace SocialNetworkAnalysis.Core.Algorithms
 {
-    internal class DFS : IDFS
+    public class DFS : IDFS
     {
         public DFSResult Execute(SocialGraph graph, int startNodeId)
         {
