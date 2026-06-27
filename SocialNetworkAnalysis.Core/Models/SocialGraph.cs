@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -8,8 +7,8 @@ namespace SocialNetworkAnalysis.Core.Models
 {
     public class SocialGraph
     {
-        private Dictionary<int, string> _users;
-        private Dictionary<int, HashSet<int>> _adjacency;
+        private Dictionary<int, string> _users = new();
+        private Dictionary<int, HashSet<int>> _adjacency = new();
 
         public void AddUser(int userId, string name)
         {
@@ -64,6 +63,11 @@ namespace SocialNetworkAnalysis.Core.Models
         public IEnumerable<int> GetFriends(int userId)
         {
             return _adjacency[userId];
+        }
+
+        public IEnumerable<int> GetAllNodes()
+        {
+            return _users.Keys;
         }
     }
 }
