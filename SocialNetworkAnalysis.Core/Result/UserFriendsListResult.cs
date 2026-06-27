@@ -6,10 +6,8 @@ using System.Threading.Tasks;
 
 namespace SocialNetworkAnalysis.Core.Result
 {
-    public class BFSResult
+    public class UserFriendsListResult
     {
-        public List<int> VisitedNodes { get; set; } = new();
-
-        public Dictionary<int , int> Distances { get; set; } = new();
+       public List<int> listOfFriends { get; set; } = new();
     }
 }

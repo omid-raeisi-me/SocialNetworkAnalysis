@@ -11,9 +11,15 @@ namespace SocialNetworkAnalysis.Core.Algorithms
 {
     public class ConnectedComponents : IConnectedComponents
     {
+        private readonly IBFS _bfs;
+
+        public ConnectedComponents(IBFS bfs)
+        {
+            _bfs = bfs;
+        }
+
         public ConnectedComponentsResult Execute(SocialGraph graph)
         {
-            BFS bfsExecuter = new BFS();
 
             List<List<int>> components = new();
             HashSet<int> visitedNodes = new();
@@ -27,7 +33,7 @@ namespace SocialNetworkAnalysis.Core.Algorithms
                     continue;
                 }
 
-                BFSResult bfsResult = bfsExecuter.Execute(graph, nodeId);
+                BFSResult bfsResult = _bfs.Execute(graph, nodeId);
                 List<int> component = bfsResult.VisitedNodes;
 
                 components.Add(component);

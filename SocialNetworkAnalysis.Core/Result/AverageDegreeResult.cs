@@ -6,10 +6,8 @@ using System.Threading.Tasks;
 
 namespace SocialNetworkAnalysis.Core.Result
 {
-    public class BFSResult
+    public class AverageDegreeResult
     {
-        public List<int> VisitedNodes { get; set; } = new();
-
-        public Dictionary<int , int> Distances { get; set; } = new();
+        public double AverageDegree { get; set; }
     }
 }
