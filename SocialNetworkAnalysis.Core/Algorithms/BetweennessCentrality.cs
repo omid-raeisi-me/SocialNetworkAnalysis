@@ -74,7 +74,7 @@ namespace SocialNetworkAnalysis.Core.Algorithms
         public BetweennessCentralityResult Execute(SocialGraph graph)
         {
             BetweennessCentralityResult result = new();
-            var allNodes = graph.GetAllNodes();
+            var allNodes = graph.GetUsers();
             int n = allNodes.Count();
 
             if (n <= 2) 

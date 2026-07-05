@@ -13,7 +13,7 @@ namespace SocialNetworkAnalysis.Core.Algorithms
             Dictionary<int, int> DegreeOfNodes = new();
             List<int> CentralityNodes = new();
             int maxDegree = -1;
-            var allNodes = graph.GetAllNodes();
+            var allNodes = graph.GetUsers();
 
             foreach (var node in allNodes)
             {

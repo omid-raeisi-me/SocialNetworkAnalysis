@@ -11,7 +11,7 @@ namespace SocialNetworkAnalysis.Core.Algorithms
         public AverageDegreeResult Execute(SocialGraph graph)
         {
             AverageDegreeResult result = new();
-            var allNodes = graph.GetAllNodes();
+            var allNodes = graph.GetUsers();
             if (!allNodes.Any())
             {
                 result.AverageDegree = 0;

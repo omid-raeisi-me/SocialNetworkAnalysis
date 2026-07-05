@@ -18,7 +18,7 @@ namespace SocialNetworkAnalysis.Core.Algorithms
         public DiameterResult Execute(SocialGraph graph)
         {
             DiameterResult result = new();
-            var allNodes = graph.GetAllNodes();
+            var allNodes = graph.GetUsers();
             if (allNodes.Count() <= 1)
             {
                 result.diameter = 0;

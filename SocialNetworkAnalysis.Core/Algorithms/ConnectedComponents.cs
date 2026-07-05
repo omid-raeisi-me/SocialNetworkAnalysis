@@ -3,9 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using SocialNetworkAnalysis.Core.Contracts;
 using SocialNetworkAnalysis.Core.Models;
-using SocialNetworkAnalysis.Core.Result;
 
 namespace SocialNetworkAnalysis.Core.Algorithms
 {
@@ -24,7 +22,7 @@ namespace SocialNetworkAnalysis.Core.Algorithms
             List<List<int>> components = new();
             HashSet<int> visitedNodes = new();
 
-            var allNodes = graph.GetAllNodes();
+            var allNodes = graph.GetUsers();
 
             foreach (int nodeId in allNodes)
             {

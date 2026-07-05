@@ -18,7 +18,7 @@ namespace SocialNetworkAnalysis.Core.Algorithms
         public DistancesFromAllUsersResult Execute(SocialGraph graph, int startNode)
         {
             DistancesFromAllUsersResult result = new();
-            var allNodes = graph.GetAllNodes();
+            var allNodes = graph.GetUsers();
             Dictionary<int, double> distances = new();
 
             foreach (var node in allNodes)

@@ -25,7 +25,7 @@ namespace SocialNetworkAnalysis.Core.Algorithms
         public LinkPredictionResult Execute(SocialGraph graph, int userId, int topK)
         {
             LinkPredictionResult result = new();
-            var allNodes = graph.GetAllNodes();
+            var allNodes = graph.GetUsers();
             if (!allNodes.Contains(userId))
             {   
                 return result;    

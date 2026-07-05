@@ -18,7 +18,7 @@ namespace SocialNetworkAnalysis.Core.Algorithms
                 return result;
             }
 
-            var allNodes = graph.GetAllNodes();
+            var allNodes = graph.GetUsers();
             if (!allNodes.Contains(nodeA) || !allNodes.Contains(nodeB))
             {
                 result.count = 0;

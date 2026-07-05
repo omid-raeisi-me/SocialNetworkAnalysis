@@ -1,0 +1,8 @@
+﻿global using SocialNetworkAnalysis.Infrastructure.Storage.Abstractions;
+global using SocialNetworkAnalysis.Infrastructure.Storage;
+global using SocialNetworkAnalysis.Infrastructure.Persistence.Models;
+global using SocialNetworkAnalysis.Infrastructure.Persistence.Context;
+global using SocialNetworkAnalysis.Infrastructure.Persistence.Repositories;
+global using SocialNetworkAnalysis.Infrastructure.Persistence.Mapper;
+global using SocialNetworkAnalysis.Infrastructure.Runtime.Contracts.Persistence;
+global using SocialNetworkAnalysis.Application.Contracts.Runtime;

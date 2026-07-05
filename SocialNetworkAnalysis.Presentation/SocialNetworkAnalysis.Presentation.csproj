@@ -6,4 +6,9 @@
     <ImplicitUsings>enable</ImplicitUsings>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\SocialNetworkAnalysis.Application\SocialNetworkAnalysis.Application.csproj" />
+    <ProjectReference Include="..\SocialNetworkAnalysis.Infrastructure\SocialNetworkAnalysis.Infrastructure.csproj" />
+  </ItemGroup>
+
 </Project>

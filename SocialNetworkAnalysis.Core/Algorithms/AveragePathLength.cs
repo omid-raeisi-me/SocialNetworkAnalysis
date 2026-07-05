@@ -20,7 +20,7 @@ namespace SocialNetworkAnalysis.Core.Algorithms
         {
             AverageDegreeResult result = new();
 
-            var allNodes = graph.GetAllNodes();
+            var allNodes = graph.GetUsers();
             if (allNodes.Count() <= 1)
             {
                 result.AverageDegree = 0;

@@ -2,11 +2,10 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection.Metadata;
 using System.Security.AccessControl;
 using System.Text;
 using System.Threading.Tasks;
-using SocialNetworkAnalysis.Infrastructure.FileManager.Contracts;
-using SocialNetworkAnalysis.Infrastructure.Persistence.Models;
 
 namespace SocialNetworkAnalysis.Infrastructure.Persistence.Context
 {
@@ -14,118 +13,47 @@ namespace SocialNetworkAnalysis.Infrastructure.Persistence.Context
     {
         private IJsonStorage<List<User>> _userStorage;
         private IJsonStorage<List<FriendShip>> _friendShipStorage;
-        private IJsonStorage<DbSettings> _dbSettingsStorage;
-
-        private List<User> _users;
-        private List<FriendShip> _friendShips;
-        private DbSettings _dbSettings;
+        private IJsonStorage<Settings> _settingsStorage;
 
         public GraphContext(IJsonStorage<List<User>> userStorage,
-            IJsonStorage<List<FriendShip>> friendShipStorage, IJsonStorage<DbSettings> dbSettingsStorage)
+            IJsonStorage<List<FriendShip>> friendShipStorage, IJsonStorage<Settings> dbSettingsStorage)
         {
             _userStorage = userStorage;
             _friendShipStorage = friendShipStorage;
-            _dbSettingsStorage = dbSettingsStorage;
+            _settingsStorage = dbSettingsStorage;
         }
 
         public async Task<List<User>> GetUsersAsync()
         {
-            if (_users == null)
-                _users = await _userStorage.ReadAsync();
-
-            return _users;
+            var users = await _userStorage.ReadAsync();
+            return users;
         }
 
-        public async Task AddUserAsync(User user)
+        public async Task SetUserAsync(List<User> users)
         {
-            if (_users == null)
-                _users = await _userStorage.ReadAsync();
-
-            if (_dbSettings == null)
-                _dbSettings = await _dbSettingsStorage.ReadAsync();
-
-            _users.Add(new User()
-            {
-                Id = _dbSettings.LastId,
-                Name = user.Name
-            });
-
-            _dbSettings.LastId++;
-        }
-
-        public async Task RemoveUserAsync(User user)
-        {
-            if (_users == null)
-                _users = await _userStorage.ReadAsync();
-
-            if (_friendShips == null)
-                _friendShips = await _friendShipStorage.ReadAsync();
-
-            var userGraph = _users.FirstOrDefault(u => u.Id == user.Id);
-
-            if (userGraph != null)
-            {
-                var friendShipsSelected = _friendShips.Where(f =>
-                    f.FromId == userGraph.Id || f.ToId == userGraph.Id);
-
-                foreach (var friendShip in friendShipsSelected)
-                    _friendShips.Remove(friendShip);
-
-                _users.Remove(user);
-            }
-        }
-
-        public async Task UpdateUserAsync(User user)
-        {
-            if (_users == null)
-                _users = await _userStorage.ReadAsync();
-
-            var userGraph = _users.FirstOrDefault(u => u.Id == user.Id);
-
-            if (user != null)
-            {
-                user.Name = user.Name;
-            }
+            await _userStorage.WriteAsync(users);
         }
 
         public async Task<List<FriendShip>> GetFriendShipsAsync()
         {
-            if (_friendShips == null)
-                _friendShips = await _friendShipStorage.ReadAsync();
-
-            return _friendShips;
+            var friendShips = await _friendShipStorage.ReadAsync();
+            return friendShips;
         }
 
-        public async Task AddFriendShipAsync(FriendShip friendShip)
+        public async Task SetFriendShipAsync(List<FriendShip> friendShips)
         {
-            if (_friendShips == null)
-                _friendShips = await _friendShipStorage.ReadAsync();
-
-            var isExist = _friendShips.Any(f =>
-                                    f.FromId == friendShip.FromId && f.ToId == friendShip.ToId);
-            if (!isExist)
-                _friendShips.Add(friendShip);
+            await _friendShipStorage.WriteAsync(friendShips);
         }
 
-        public void RemoveFriendShipAsync(FriendShip friendShip)
+        public async Task<Settings> GetSettingsAsync()
         {
-            var friendShipGraph = _friendShips.FirstOrDefault(f =>
-                                f.FromId == friendShip.FromId && f.ToId == friendShip.ToId);
-
-            if (friendShipGraph != null)
-                _friendShips.Remove(friendShipGraph);
+            var settings = await _settingsStorage.ReadAsync();
+            return settings;
         }
 
-        public async Task SaveChangesAsync()
+        public async Task SetSettingsAsync(Settings settings)
         {
-            if (_users != null)
-                await _userStorage.WriteAsync(_users);
-
-            if (_friendShips != null)
-                await _friendShipStorage.WriteAsync(_friendShips);
-
-            if (_dbSettings != null)
-                await _dbSettingsStorage.WriteAsync(_dbSettings);
+            await _settingsStorage.WriteAsync(settings);
         }
     }
 }

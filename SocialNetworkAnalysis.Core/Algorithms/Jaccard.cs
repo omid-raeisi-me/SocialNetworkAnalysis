@@ -18,14 +18,14 @@ namespace SocialNetworkAnalysis.Core.Algorithms
                 return result;
             }
 
-            var allNodes = graph.GetAllNodes();
+            var allNodes = graph.GetUsers();
             if (!allNodes.Contains(nodeA) || !allNodes.Contains(nodeB))
             {
                 result.Score = 0;
                 return result;
             }
 
-            int commonFriendsCount = 0
+            int commonFriendsCount = 0;
             var FriendsOfNodeA = graph.GetFriends(nodeA);
             var FriendsOfNodeB = graph.GetFriends(nodeB);
 

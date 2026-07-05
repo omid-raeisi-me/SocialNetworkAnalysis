@@ -28,7 +28,7 @@ namespace SocialNetworkAnalysis.Core.Algorithms
         public NetworkInformationResult Execute(SocialGraph graph)
         {
             NetworkInformationResult result = new();
-            var allNodes = graph.GetAllNodes();
+            var allNodes = graph.GetUsers();
             result.TotalUserCount = allNodes.Count();
             if (result.TotalUserCount == 0)
             {

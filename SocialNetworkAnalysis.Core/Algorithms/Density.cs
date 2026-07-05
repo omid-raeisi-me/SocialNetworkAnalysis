@@ -11,7 +11,7 @@ namespace SocialNetworkAnalysis.Core.Algorithms
         public DensityResult Execute(SocialGraph graph)
         {
             DensityResult result = new();
-            var allNodes = graph.GetAllNodes();
+            var allNodes = graph.GetUsers();
             if (allNodes.Count() <= 1)
             { 
                 result.density = 0;

@@ -1,9 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using SocialNetworkAnalysis.Core.Contracts;
 using SocialNetworkAnalysis.Core.Models;
-using SocialNetworkAnalysis.Core.Result;
 
 namespace SocialNetworkAnalysis.Core.Algorithms
 {
@@ -11,7 +9,7 @@ namespace SocialNetworkAnalysis.Core.Algorithms
     {
         public CommunityDetectionResult Execute(SocialGraph graph)
         {
-            var allNodes = graph.GetAllNodes()?.ToList();
+            var allNodes = graph.GetUsers()?.ToList();
             if (allNodes == null || allNodes.Count == 0)
             {
                 return new CommunityDetectionResult();

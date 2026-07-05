@@ -40,7 +40,7 @@ namespace SocialNetworkAnalysis.Core.Algorithms
         public ClosenessCentralityResult Execute(SocialGraph graph)
         {
             ClosenessCentralityResult result = new();
-            var allNodes = graph.GetAllNodes();
+            var allNodes = graph.GetUsers();
             double maxScore = -1.0;
 
             if (allNodes.Count() <= 1)
