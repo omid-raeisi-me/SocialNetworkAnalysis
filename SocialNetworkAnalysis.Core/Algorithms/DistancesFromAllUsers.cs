@@ -8,11 +8,11 @@ namespace SocialNetworkAnalysis.Core.Algorithms
 {
     public class DistancesFromAllUsers : IDistancesFromAllUsers
     {
-        private readonly IShortestPath _shortestPath;
+        private readonly IBFS _bfs;
 
-        public DistancesFromAllUsers(IShortestPath shortestPath )
+        public DistancesFromAllUsers(IBFS bfs)
         {
-            _shortestPath = shortestPath;
+            _bfs = bfs;
         }
 
         public DistancesFromAllUsersResult Execute(SocialGraph graph, int startNode)
@@ -20,6 +20,9 @@ namespace SocialNetworkAnalysis.Core.Algorithms
             DistancesFromAllUsersResult result = new();
             var allNodes = graph.GetUsers();
             Dictionary<int, double> distances = new();
+
+            var bfsResult = _bfs.Execute(graph, startNode);
+            var bfsDistances = bfsResult?.Distances ?? new Dictionary<int, int>();
 
             foreach (var node in allNodes)
             {
@@ -29,12 +32,9 @@ namespace SocialNetworkAnalysis.Core.Algorithms
                     continue;
                 }
 
-                ShortestPathResult shortestPathresult = _shortestPath.Execute(graph, startNode, node);
-
-                if (shortestPathresult.IsPathExist)
+                if (bfsDistances.ContainsKey(node))
                 {
-                    double distance = shortestPathresult.Path.Count() - 1;
-                    distances.Add(node, distance);
+                    distances.Add(node, bfsDistances[node]);
                 }
                 else
                 {
@@ -42,8 +42,10 @@ namespace SocialNetworkAnalysis.Core.Algorithms
                 }
             }
 
-            result.distances = distances.OrderBy(x => x.Value).ToDictionary(x => x.Key, x => x.Value);
-        
+            result.distances = distances
+                .OrderBy(x => x.Value)
+                .ToDictionary(x => x.Key, x => x.Value);
+
             return result;
         }
     }

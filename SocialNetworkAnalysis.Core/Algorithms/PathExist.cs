@@ -8,6 +8,7 @@ namespace SocialNetworkAnalysis.Core.Algorithms
 {
     public class PathExist : IPathExist
     {
+
         private readonly IBFS _bfs;
 
         public PathExist(IBFS bfs)

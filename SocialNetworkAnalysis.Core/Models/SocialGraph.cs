@@ -113,5 +113,13 @@ namespace SocialNetworkAnalysis.Core.Models
         {
             return _users.Count;
         }
+
+        public void UpdateUserName(int userId, string newName)
+        {
+            if (_users.ContainsKey(userId))
+            {
+                _users[userId] = newName;
+            }
+        }
     }
-}
+} 

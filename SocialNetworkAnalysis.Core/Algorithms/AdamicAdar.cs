@@ -50,7 +50,11 @@ namespace SocialNetworkAnalysis.Core.Algorithms
             foreach (int friend in commonFriends)
             {
                 int degree = graph.GetFriends(friend).Count();
-                totalScore += 1.0 / Math.Log(degree);
+
+                if (degree > 1)
+                {
+                    totalScore += 1.0 / Math.Log(degree);
+                }
             }
 
             result.Score = totalScore;

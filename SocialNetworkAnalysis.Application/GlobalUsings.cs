@@ -1,0 +1,13 @@
+﻿global using SocialNetworkAnalysis.Core.Results;
+global using SocialNetworkAnalysis.Core.Models;
+global using SocialNetworkAnalysis.Core.Abstractions;
+global using SocialNetworkAnalysis.Core.Algorithms;
+global using SocialNetworkAnalysis.Application.Contracts.Runtime;
+global using SocialNetworkAnalysis.Application.Contracts;
+global using SocialNetworkAnalysis.Application.Abstractions;
+global using SocialNetworkAnalysis.Application.DTOs;
+global using SocialNetworkAnalysis.Application.DTOs.Models;
+global using SocialNetworkAnalysis.Application.DTOs.Response;
+global using SocialNetworkAnalysis.Application.Services;
+global using SocialNetworkAnalysis.Application.Services.Queries;
+global using SocialNetworkAnalysis.Application.Services.Commands;

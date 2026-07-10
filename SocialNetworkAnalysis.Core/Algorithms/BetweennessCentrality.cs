@@ -32,7 +32,7 @@ namespace SocialNetworkAnalysis.Core.Algorithms
                 int currentNodeId = queue.Dequeue();
                 stack.Push(currentNodeId);
 
-                var neighbors = graph.GetFriends(currentNodeId);
+                var neighbors = graph.GetFriends(currentNodeId) ?? new List<int>();
                 foreach (int neighbor in neighbors)
                 {
                     if (distances[neighbor] == -1)

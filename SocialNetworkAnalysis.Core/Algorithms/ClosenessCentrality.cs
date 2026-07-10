@@ -78,7 +78,7 @@ namespace SocialNetworkAnalysis.Core.Algorithms
                 if (closenessScore > maxScore)
                 {
                     maxScore = closenessScore;
-                    result.closenessScore.Clear();
+                    result.CentralityNodes.Clear();
                     result.CentralityNodes.Add(startNodeId);
                 }
                 else if (closenessScore == maxScore)

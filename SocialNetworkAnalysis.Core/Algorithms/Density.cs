@@ -18,15 +18,8 @@ namespace SocialNetworkAnalysis.Core.Algorithms
                 return result;
             }
 
-            int totalDegree = 0;
-            foreach ( var node in allNodes) 
-            {
-                var friends = graph.GetFriends(node);
-                totalDegree += friends?.Count() ?? 0;
-            }
-
             int nodeCount = allNodes.Count();
-            result.density = (double)totalDegree / (nodeCount * (nodeCount - 1));
+            result.density = 2 * (double)graph.GetEdgeCount() / (nodeCount * (nodeCount - 1));
 
             return result;
         }

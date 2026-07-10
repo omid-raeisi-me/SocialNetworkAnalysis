@@ -11,7 +11,7 @@ namespace SocialNetworkAnalysis.Core.Results
         public int TotalUserCount { get; set; }
         public int TotalFriendshipCount { get; set; }
         public double AverageRelationPerUser { get; set; }
-        public int LargestFriendshipGroupSize { get; set; }
+        public List<int> LargestFriendshipGroup { get; set; } = new();
         public Dictionary<int, int> UsersWithMostFriends { get; set; } = new();
         public double density { get; set; }
         public int diameter { get; set; }
