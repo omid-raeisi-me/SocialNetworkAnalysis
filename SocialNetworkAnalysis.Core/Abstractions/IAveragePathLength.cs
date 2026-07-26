@@ -8,6 +8,6 @@ namespace SocialNetworkAnalysis.Core.Abstractions
 {
     public interface IAveragePathLength
     {
-        AverageDegreeResult Execute(SocialGraph graph);
+        AveragePathLengthResult Execute(SocialGraph graph);
     }
 }

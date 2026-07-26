@@ -16,14 +16,14 @@ namespace SocialNetworkAnalysis.Core.Algorithms
         { 
             _bfs = Bfs;
         }
-        public AverageDegreeResult Execute(SocialGraph graph)
+        public AveragePathLengthResult Execute(SocialGraph graph)
         {
-            AverageDegreeResult result = new();
+            AveragePathLengthResult result = new();
 
             var allNodes = graph.GetUsers();
             if (allNodes.Count() <= 1)
             {
-                result.AverageDegree = 0;
+                result.AveragePathLength = 0;
                 return result;
             }
 
@@ -54,11 +54,11 @@ namespace SocialNetworkAnalysis.Core.Algorithms
             }
             if (reachablePairsCount > 0)
             {
-                result.AverageDegree = sumOfAllPaths / reachablePairsCount;
+                result.AveragePathLength = sumOfAllPaths / reachablePairsCount;
             }
             else
             {
-                result.AverageDegree = 0;
+                result.AveragePathLength = 0;
             }
             return result;
         }
