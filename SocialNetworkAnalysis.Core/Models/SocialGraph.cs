@@ -47,6 +47,7 @@ namespace SocialNetworkAnalysis.Core.Models
             foreach (var friendId in _adjacency[userId])
             {
                 _adjacency[friendId].Remove(userId);
+                edgeCount--;
             }
 
             _adjacency.Remove(userId);
