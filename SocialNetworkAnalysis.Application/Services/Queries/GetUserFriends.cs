@@ -9,19 +9,28 @@ namespace SocialNetworkAnalysis.Application.Services.Queries
     public class GetUserFriends : IGetUserFriends
     {
         private readonly IGraphRuntime _runtime;
+        private readonly IUserFriendsList _userFriendsList; 
 
-        public GetUserFriends(IGraphRuntime runtime)
+        public GetUserFriends(IGraphRuntime runtime, IUserFriendsList userFriendsList)
         {
             _runtime = runtime;
+            _userFriendsList = userFriendsList;
         }
 
         public List<User> Execute(int userId)
         {
             return _runtime.ExecuteRead(graph =>
             {
+                var algorithmResult = _userFriendsList.Execute(graph, userId);
+
                 List<User> friendsList = new();
 
-                foreach (var friendId in graph.GetFriends(userId))
+                if (algorithmResult?.listOfFriends == null)
+                {
+                    return friendsList;
+                }
+
+                foreach (var friendId in algorithmResult.listOfFriends)
                 {
                     friendsList.Add(new User
                     {
