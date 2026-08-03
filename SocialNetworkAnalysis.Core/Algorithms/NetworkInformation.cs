@@ -27,7 +27,6 @@ namespace SocialNetworkAnalysis.Core.Algorithms
                 return result;
             }
 
-            //int totalDegree = 0;
             Dictionary<int, int> nodesWithMostDegree = new();
             int maxDegree = -1;
 
@@ -35,7 +34,6 @@ namespace SocialNetworkAnalysis.Core.Algorithms
             {
                 var friends = graph.GetFriends(node);
                 int currentNodeDegree = friends?.Count() ?? 0;
-                //totalDegree += currentNodeDegree;
 
                 if (currentNodeDegree > maxDegree)
                 {
