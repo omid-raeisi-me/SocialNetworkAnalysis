@@ -19,9 +19,10 @@ namespace SocialNetworkAnalysis.Application.Services.Queries
 
         public NetworkInformationResponse Execute()
         {
-            return _runtime.ExecuteRead(graph =>
+            return _runtime.ExecuteSnapshotAsync(graph =>
             {
                 var coreResult = _networkInformation.Execute(graph);
+                if (coreResult == null) return new NetworkInformationResponse();
 
                 var response = new NetworkInformationResponse
                 {
@@ -49,7 +50,7 @@ namespace SocialNetworkAnalysis.Application.Services.Queries
                 }
 
                 return response;
-            });
+            }).GetAwaiter().GetResult();
         }
     }
 }

@@ -19,7 +19,7 @@ namespace SocialNetworkAnalysis.Application.Services.Queries
 
         public FriendSuggestionResponse Execute(int userId, int topK = 5)
         {
-            return _runtime.ExecuteRead(graph =>
+            return _runtime.ExecuteSnapshotAsync(graph =>
             {
                 FriendSuggestionResponse appResult = new();
 
@@ -64,7 +64,7 @@ namespace SocialNetworkAnalysis.Application.Services.Queries
                 }
 
                 return appResult;
-            });
+            }).GetAwaiter().GetResult();
         }
     }
 }

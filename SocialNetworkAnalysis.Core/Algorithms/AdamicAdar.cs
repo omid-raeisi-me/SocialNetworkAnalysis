@@ -25,40 +25,46 @@ namespace SocialNetworkAnalysis.Core.Algorithms
                 return result;
             }
 
-            List<int> commonFriends = new();
-            var FriendsOfNodeA = graph.GetFriends(nodeA);
-            var FriendsOfNodeB = graph.GetFriends(nodeB);
+            var friendsA = graph.GetFriends(nodeA) as HashSet<int>;
+            var friendsB = graph.GetFriends(nodeB) as HashSet<int>;
 
-            if (FriendsOfNodeA == null || FriendsOfNodeB == null || !FriendsOfNodeA.Any() || !FriendsOfNodeB.Any())
+            if (friendsA == null || friendsB == null || friendsA.Count == 0 || friendsB.Count == 0)
             {
                 result.Score = 0;
                 return result;
             }
 
-            HashSet<int> setB = new(FriendsOfNodeB);
+            HashSet<int> smallerSet;
+            HashSet<int> largerSet;
 
-            foreach (int friend in FriendsOfNodeA)
+            if (friendsA.Count <= friendsB.Count)
             {
-                if (setB.Contains(friend))
-                {
-                    commonFriends.Add(friend);
-                }
+                smallerSet = friendsA;
+                largerSet = friendsB;
+            }
+            else
+            {
+                smallerSet = friendsB;
+                largerSet = friendsA;
             }
 
             double totalScore = 0;
 
-            foreach (int friend in commonFriends)
+            foreach (int friend in smallerSet)
             {
-                int degree = graph.GetFriends(friend).Count();
-
-                if (degree > 1)
+                if (largerSet.Contains(friend))
                 {
-                    totalScore += 1.0 / Math.Log(degree);
+                    var friendFriends = graph.GetFriends(friend) as HashSet<int>;
+                    int degree = friendFriends?.Count ?? 0;
+
+                    if (degree > 1)
+                    {
+                        totalScore += 1.0 / Math.Log(degree);
+                    }
                 }
             }
 
             result.Score = totalScore;
-
             return result;
         }
     }

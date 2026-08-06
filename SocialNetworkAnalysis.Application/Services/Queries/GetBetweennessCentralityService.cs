@@ -19,7 +19,7 @@ namespace SocialNetworkAnalysis.Application.Services.Queries
 
         public BetweennessCentralityResponse Execute()
         {
-            return _runtime.ExecuteRead(graph =>
+            return _runtime.ExecuteSnapshotAsync(graph =>
             {
                 var response = new BetweennessCentralityResponse();
 
@@ -52,7 +52,7 @@ namespace SocialNetworkAnalysis.Application.Services.Queries
                 response.MaxScore = Math.Round(coreResult.maxScore, 4);
 
                 return response;
-            });
+            }).GetAwaiter().GetResult();
         }
     }
 }

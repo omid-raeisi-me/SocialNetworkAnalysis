@@ -25,8 +25,8 @@ namespace SocialNetworkAnalysis.Core.Algorithms
             }
 
             var sortedNodes = nodeDegrees
-                .OrderBy(kvp => kvp.Value)
-                .Select(kvp => kvp.Key)
+                .OrderBy(x => x.Value)
+                .Select(x => x.Key)
                 .ToList();
 
             Dictionary<int, int> nodeToCommunity = new();
@@ -56,7 +56,7 @@ namespace SocialNetworkAnalysis.Core.Algorithms
         private void RunLouvainPass(SocialGraph graph, List<int> nodes, Dictionary<int, int> nodeToCommunity, bool strictMaxWeight)
         {
             bool someNodeMoved = true;
-            int maxIterations = 10;
+            int maxIterations = 20;
             int iteration = 0;
 
             while (someNodeMoved && iteration < maxIterations)
@@ -128,10 +128,10 @@ namespace SocialNetworkAnalysis.Core.Algorithms
         private List<List<int>> ExtractCommunitiesFromMap(Dictionary<int, int> nodeToCommunity)
         {
             Dictionary<int, List<int>> communityGroups = new();
-            foreach (var kvp in nodeToCommunity)
+            foreach (var x in nodeToCommunity)
             {
-                int node = kvp.Key;
-                int communityId = kvp.Value;
+                int node = x.Key;
+                int communityId = x.Value;
 
                 if (!communityGroups.ContainsKey(communityId))
                 {

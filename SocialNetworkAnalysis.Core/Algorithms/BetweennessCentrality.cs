@@ -92,7 +92,7 @@ namespace SocialNetworkAnalysis.Core.Algorithms
             foreach (int startNodeId in allNodes)
             {
                 Dictionary<int, double> dependencie = BrandesBFS(graph, startNodeId, allNodes);
-
+                    
                 foreach (int nodeId in allNodes)
                 {
 
