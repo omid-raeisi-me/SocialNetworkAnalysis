@@ -1,6 +1,9 @@
 using SocialNetworkAnalysis.Application.Contracts.Runtime;
 using SocialNetworkAnalysis.Infrastructure.Runtime;
 using SocialNetworkAnalysis.Presentation.Components;
+using SocialNetworkAnalysis.Application;
+using SocialNetworkAnalysis.Infrastructure;
+using SocialNetworkAnalysis.Core;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -8,9 +11,13 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddRazorComponents()
     .AddInteractiveServerComponents();
 
-builder.Services.AddScoped<IGraphRuntime, GraphRuntime>();
-builder.Services.AddSingleton<IGraphRuntime, GraphRuntime>();
-builder.Services.AddTransient<IGraphRuntime, GraphRuntime>();
+var usersJsonPath = Path.Combine(builder.Environment.ContentRootPath, "Data", "Users.Json");
+var friendshipsJsonPath = Path.Combine(builder.Environment.ContentRootPath, "Data", "Friendships.Json");
+var settingsJsonPath = Path.Combine(builder.Environment.ContentRootPath, "Data", "Settings.Json");
+
+builder.Services.ConfigureCoreServices();
+builder.Services.ConfigureInfrastructureServices(usersJsonPath, friendshipsJsonPath, settingsJsonPath);
+builder.Services.ConfigureApplicationServices();
 
 var app = builder.Build();
 

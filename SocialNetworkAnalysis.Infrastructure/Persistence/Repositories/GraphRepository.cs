@@ -22,9 +22,9 @@ namespace SocialNetworkAnalysis.Infrastructure.Persistence.Repositories
         public async Task<SocialGraph> GetGraphAsync()
         {
             var users = await _graphContext.GetUsersAsync();
-            var friendShips = await  _graphContext.GetFriendShipsAsync();
+            var friendships = await  _graphContext.GetFriendshipsAsync();
 
-            var graph = _mapper.ConvertToDomianModel(users, friendShips);
+            var graph = _mapper.ConvertToDomianModel(users, friendships);
 
             return graph;
         }
@@ -34,7 +34,7 @@ namespace SocialNetworkAnalysis.Infrastructure.Persistence.Repositories
             var dataModel = _mapper.ConvertToDataModel(graph);
 
             await _graphContext.SetUserAsync(dataModel.Users);
-            await _graphContext.SetFriendShipAsync(dataModel.FriendShips);
+            await _graphContext.SetFriendshipAsync(dataModel.Friendships);
         }
     }
 }

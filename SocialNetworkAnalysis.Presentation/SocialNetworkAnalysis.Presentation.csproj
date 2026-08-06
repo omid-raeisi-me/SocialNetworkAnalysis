@@ -8,7 +8,12 @@
 
   <ItemGroup>
     <ProjectReference Include="..\SocialNetworkAnalysis.Application\SocialNetworkAnalysis.Application.csproj" />
+    <ProjectReference Include="..\SocialNetworkAnalysis.Core\SocialNetworkAnalysis.Core.csproj" />
     <ProjectReference Include="..\SocialNetworkAnalysis.Infrastructure\SocialNetworkAnalysis.Infrastructure.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Data\" />
   </ItemGroup>
 
 </Project>

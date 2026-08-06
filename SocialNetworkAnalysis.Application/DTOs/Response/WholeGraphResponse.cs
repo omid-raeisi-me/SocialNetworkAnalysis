@@ -10,6 +10,6 @@ namespace SocialNetworkAnalysis.Application.DTOs.Response
     public class WholeGraphResponse
     {
         public List<User> Users { get; set; } = new();
-        public List<FriendShip> FriendShips { get; set; } = new();
+        public List<Friendship> Friendships { get; set; } = new();
     }
 }

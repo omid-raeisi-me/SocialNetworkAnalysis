@@ -12,14 +12,14 @@ namespace SocialNetworkAnalysis.Infrastructure.Persistence.Context
     public class GraphContext
     {
         private IJsonStorage<List<User>> _userStorage;
-        private IJsonStorage<List<FriendShip>> _friendShipStorage;
+        private IJsonStorage<List<Friendship>> _friendshipStorage;
         private IJsonStorage<Settings> _settingsStorage;
 
         public GraphContext(IJsonStorage<List<User>> userStorage,
-            IJsonStorage<List<FriendShip>> friendShipStorage, IJsonStorage<Settings> dbSettingsStorage)
+            IJsonStorage<List<Friendship>> friendshipStorage, IJsonStorage<Settings> dbSettingsStorage)
         {
             _userStorage = userStorage;
-            _friendShipStorage = friendShipStorage;
+            _friendshipStorage = friendshipStorage;
             _settingsStorage = dbSettingsStorage;
         }
 
@@ -34,15 +34,15 @@ namespace SocialNetworkAnalysis.Infrastructure.Persistence.Context
             await _userStorage.WriteAsync(users);
         }
 
-        public async Task<List<FriendShip>> GetFriendShipsAsync()
+        public async Task<List<Friendship>> GetFriendshipsAsync()
         {
-            var friendShips = await _friendShipStorage.ReadAsync();
-            return friendShips;
+            var friendships = await _friendshipStorage.ReadAsync();
+            return friendships;
         }
 
-        public async Task SetFriendShipAsync(List<FriendShip> friendShips)
+        public async Task SetFriendshipAsync(List<Friendship> friendships)
         {
-            await _friendShipStorage.WriteAsync(friendShips);
+            await _friendshipStorage.WriteAsync(friendships);
         }
 
         public async Task<Settings> GetSettingsAsync()

@@ -6,12 +6,12 @@ using System.Threading.Tasks;
 
 namespace SocialNetworkAnalysis.Application.DTOs.Models
 {
-    public class FriendShip
+    public class Friendship
     {
         private int _fromId;
         private int _toId;
 
-        public FriendShip(int fromId , int toId)
+        public Friendship(int fromId , int toId)
         {
             _fromId = Math.Max(fromId,toId);
             _toId = Math.Min(fromId,toId);

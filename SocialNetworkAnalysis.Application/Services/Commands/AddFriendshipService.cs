@@ -1,0 +1,26 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace SocialNetworkAnalysis.Application.Services.Commands
+{
+    public class AddFriendshipService : IAddFriendshipService
+    {
+        private readonly IGraphRuntime _runtime;
+
+        public AddFriendshipService(IGraphRuntime runtime)
+        {
+            _runtime = runtime;
+        }
+
+        public void Execute(Friendship friendship)
+        {
+            _runtime.ExecuteWrite(graph =>
+            {
+                graph.AddFriendship(friendship.FromId, friendship.ToId);
+            });
+        }
+    }
+}

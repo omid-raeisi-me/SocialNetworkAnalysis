@@ -7,9 +7,9 @@ using SocialNetworkAnalysis.Core.Models;
 
 namespace SocialNetworkAnalysis.Infrastructure.Persistence.Mapper
 {
-    public class GraphMapper
+    public class GraphMapper : IGraphMapper
     {
-        public SocialGraph ConvertToDomianModel(List<User> users, List<FriendShip> friendShips)
+        public SocialGraph ConvertToDomianModel(List<User> users, List<Friendship> friendships)
         {
             SocialGraph graph = new SocialGraph();
 
@@ -18,9 +18,9 @@ namespace SocialNetworkAnalysis.Infrastructure.Persistence.Mapper
                 graph.AddUser(user.Id, user.Name);
             }
 
-            foreach (var friendShip in friendShips)
+            foreach (var friendship in friendships)
             {
-                graph.AddFriendship(friendShip.FromId, friendShip.ToId);
+                graph.AddFriendship(friendship.FromId, friendship.ToId);
             }
 
             return graph;
@@ -31,7 +31,7 @@ namespace SocialNetworkAnalysis.Infrastructure.Persistence.Mapper
             var idDictionary = graph.GetUsers().ToList();
 
             var users = new List<User>(idDictionary.Count);
-            var friendShips = new List<FriendShip>(graph.GetEdgeCount());
+            var friendships = new List<Friendship>(graph.GetEdgeCount());
 
             foreach (var id in idDictionary)
             {
@@ -48,7 +48,7 @@ namespace SocialNetworkAnalysis.Infrastructure.Persistence.Mapper
                 {
                     if (pair < destination)
                     {
-                        friendShips.Add(new FriendShip(pair, destination));
+                        friendships.Add(new Friendship(pair, destination));
                     }
                 }
             }
@@ -56,7 +56,7 @@ namespace SocialNetworkAnalysis.Infrastructure.Persistence.Mapper
             return new DataModelResult()
             {
                 Users = users,
-                FriendShips = friendShips
+                Friendships = friendships
             };
         }
     }

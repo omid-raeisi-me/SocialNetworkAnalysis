@@ -19,4 +19,3 @@ namespace SocialNetworkAnalysis.Application.DTOs.Response
         public List<SuggestedUser> AdamicAdar { get; set; } = new();
     }
 }
-}
