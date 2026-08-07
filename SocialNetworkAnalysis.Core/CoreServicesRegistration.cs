@@ -22,7 +22,6 @@ namespace SocialNetworkAnalysis.Core
             services.AddScoped<ICommunityDetection, CommunityDetection>();
             services.AddScoped<IConnectedComponents, ConnectedComponents>();
             services.AddScoped<IDegreeCentrality, DegreeCentrality>();
-            services.AddScoped<IDensity, Density>();
             services.AddScoped<IDFS, DFS>();
             services.AddScoped<IDiameter, Diameter>();
             services.AddScoped<IDistancesFromAllUsers, DistancesFromAllUsers>();

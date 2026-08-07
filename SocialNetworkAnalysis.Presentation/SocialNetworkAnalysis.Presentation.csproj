@@ -13,6 +13,8 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Folder Include="Components\Layout\" />
+    <Folder Include="Components\Pages\" />
     <Folder Include="Data\" />
   </ItemGroup>
 
