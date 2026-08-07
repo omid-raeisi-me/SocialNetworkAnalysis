@@ -1,0 +1,154 @@
+﻿@inherits LayoutComponentBase
+
+<div class="admin-shell">
+
+	<Sidebar />
+
+	<div class="admin-main">
+
+		<main class="dashboard-content">
+			<div class="graph-page">
+
+				<div class="graph-card">
+
+					<div class="graph-toolbar">
+
+						<div class="toolbar-left">
+
+							<button class="btn btn-primary btn-sm">
+								<i class="bi bi-plus-lg"></i>
+								Node
+							</button>
+
+							<button class="btn btn-outline-primary btn-sm">
+								<i class="bi bi-share"></i>
+								Edge
+							</button>
+
+							<div class="toolbar-divider"></div>
+
+							<button class="btn btn-light btn-sm">
+								<i class="bi bi-arrows-move"></i>
+							</button>
+
+							<button class="btn btn-light btn-sm">
+								<i class="bi bi-zoom-in"></i>
+							</button>
+
+							<button class="btn btn-light btn-sm">
+								<i class="bi bi-zoom-out"></i>
+							</button>
+
+							<button class="btn btn-light btn-sm">
+								<i class="bi bi-bounding-box"></i>
+							</button>
+
+						</div>
+
+						<div class="toolbar-right">
+
+							<input class="form-control form-control-sm graph-search"
+								   placeholder="Search node..." />
+
+						</div>
+
+					</div>
+
+					<div id="cy"></div>
+
+					<div class="algorithm-panel collapsed">
+
+						<div class="algorithm-header">
+
+							<div class="algorithm-info">
+
+								<div class="algorithm-icon">
+									<i class="bi bi-diagram-3-fill"></i>
+								</div>
+
+								<div>
+
+									<div class="algorithm-name">
+										Breadth First Search
+									</div>
+
+									<div class="algorithm-status">
+										Ready
+									</div>
+
+								</div>
+
+							</div>
+
+							<div class="algorithm-actions">
+
+								<button class="panel-btn collapse-btn">
+
+									<i class="bi bi-chevron-up"></i>
+
+								</button>
+
+							</div>
+
+						</div>
+
+						<div class="algorithm-body">
+
+							<div class="algorithm-content">
+
+								<div class="panel-section">
+
+									<h6>Parameters</h6>
+
+									<input class="form-control"
+										   placeholder="Start Node" />
+
+								</div>
+
+								<div class="panel-section">
+
+									<h6>Result</h6>
+
+									<p>Waiting...</p>
+
+								</div>
+
+							</div>
+
+							<div class="algorithm-footer">
+
+								<button class="btn btn-primary w-100">
+
+									<i class="bi bi-play-fill"></i>
+
+									Run Algorithm
+
+								</button>
+
+							</div>
+
+						</div>
+
+					</div>
+					@Body
+
+					<div class="graph-status">
+
+						<span><i class="bi bi-circle-fill text-success"></i> Ready</span>
+
+						<span>Nodes : 0</span>
+
+						<span>Edges : 0</span>
+
+						<span class="ms-auto">
+							Zoom : 100%
+						</span>
+
+					</div>
+
+				</div>
+
+			</div>
+		</main>
+	</div>
+</div>
