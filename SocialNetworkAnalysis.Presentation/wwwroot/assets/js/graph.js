@@ -1,180 +1,183 @@
-const cy = cytoscape({
+window.graph = {};
 
-    container: document.getElementById("cy"),
+window.graph.cy = null;
 
-    elements: [
+window.graph.initialize = function () {
 
-        { data: { id: "1", label: "sara", type: "person" } },
-        { data: { id: "11", label: "taha", type: "person" } },
-        { data: { id: "2", label: "Bob", type: "person" } },
-        { data: { id: "3", label: "John", type: "person" } },
-        { data: { id: "4", label: "Emma", type: "person" } },
-        { data: { id: "5", label: "David", type: "person" } },
-        { data: { id: "6", label: "Lucas", type: "person" } },
-        { data: { id: "7", label: "Olivia", type: "person" } },
-        { data: { id: "8", label: "Sophia", type: "person" } },
-        { data: { id: "9", label: "Liam", type: "person" } },
-        { data: { id: "10", label: "Noah", type: "person" } },
+    window.graph.cy = cytoscape({
 
-        { data: { source: "1", target: "2" } },
-        { data: { source: "1", target: "3" } },
-        { data: { source: "1", target: "4" } },
-        { data: { source: "2", target: "5" } },
-        { data: { source: "3", target: "6" } },
-        { data: { source: "4", target: "7" } },
-        { data: { source: "5", target: "8" } },
-        { data: { source: "6", target: "9" } },
-        { data: { source: "7", target: "10" } },
-        { data: { source: "8", target: "9" } },
-        { data: { source: "2", target: "7" } },
-        { data: { source: "3", target: "8" } },
-        { data: { source: "5", target: "10" } }
+        container: document.getElementById("cy"),
 
-    ],
+        elements: [],
 
-    style: [
+        style: [
 
-    {
-        selector: "node",
+            {
+                selector: "node",
 
-        style: {
+                style: {
 
-            label: "data(label)",
+                    label: "data(label)",
 
-            width: 50,
-            height: 50,
+                    width: 50,
+                    height: 50,
 
-            "background-color": "#5B8CFF",
+                    "background-color": "#5B8CFF",
 
-            "border-width": 2,
+                    "border-width": 2,
 
-            "border-color": "#BFD3FF",
+                    "border-color": "#BFD3FF",
 
-            color: "#FFFFFF",
+                    color: "#FFFFFF",
 
-            "font-size": 10,
+                    "font-size": 10,
 
-            "font-weight": "600",
+                    "font-weight": "600",
 
-            "text-valign": "center",
+                    "text-valign": "center",
 
-            "text-halign": "center",
+                    "text-halign": "center",
 
-            "overlay-opacity": 0,
+                    "overlay-opacity": 0,
 
-            "text-outline-width": 0,
+                    "text-outline-width": 0,
 
-            "transition-property": "background-color, border-color",
+                    "transition-property": "background-color, border-color",
 
-            "transition-duration": "150ms"
+                    "transition-duration": "150ms"
+                }
+            },
 
-        }
+            {
+                selector: "edge",
 
-    },
+                style: {
 
-    {
-        selector: "edge",
+                    width: 2.2,
 
-        style: {
+                    "line-color": "#55657E",
 
-            width: 2.2,
+                    opacity: .8,
 
-            "line-color": "#55657E",
+                    "curve-style": "bezier",
 
-            opacity: .8,
+                    "target-arrow-shape": "none"
+                }
+            },
 
-            "curve-style": "bezier",
+            {
+                selector: "node:selected",
 
-            "target-arrow-shape": "none"
+                style: {
 
-        }
+                    "background-color": "#8c3aff",
 
-    },
+                    "border-color": "#2DD4BF",
 
-    {
-        selector: "node:selected",
+                    "border-width": 5
+                }
+            },
 
-        style: {
+            {
+                selector: "edge:selected",
 
-            "background-color": "#8c3aff",
+                style: {
 
-            "border-color": "#2DD4BF",
+                    "line-color": "#2DD4BF",
 
-            "border-width": 5
+                    width: 3.5
+                }
+            },
 
-        }
+            {
+                selector: ".highlight",
 
-    },
+                style: {
 
-    {
-        selector: "edge:selected",
+                    "background-color": "#F59E0B",
 
-        style: {
+                    "border-color": "#FCD34D",
 
-            "line-color": "#2DD4BF",
+                    "border-width": 5
+                }
+            }
+        ],
 
-            width: 3.5
+        layout: {
 
-        }
+            name: "cose",
 
-    },
+            animate: true,
 
-    {
-        selector: ".highlight",
+            animationDuration: 700,
 
-        style: {
+            fit: true,
 
-            "background-color": "#F59E0B",
+            padding: 60
+        },
 
-            "border-color": "#FCD34D",
+        wheelSensitivity: 0.18
+    });
 
-            "border-width": 5
+    const algorithmPanel = document.querySelector(".algorithm-panel");
 
-        }
+    const collapseButton = document.querySelector(".collapse-btn");
 
+    if (algorithmPanel && collapseButton) {
+
+        const collapseIcon = collapseButton.querySelector("i");
+
+        collapseButton.addEventListener("click", () => {
+
+            algorithmPanel.classList.toggle("collapsed");
+
+            if (algorithmPanel.classList.contains("collapsed")) {
+
+                collapseIcon.classList.remove("bi-chevron-down");
+                collapseIcon.classList.add("bi-chevron-up");
+            }
+            else {
+
+                collapseIcon.classList.remove("bi-chevron-up");
+                collapseIcon.classList.add("bi-chevron-down");
+            }
+        });
     }
+};
 
-],
+window.graph.loadGraph = function (graph) {
 
-    layout: {
+    const cy = window.graph.cy;
 
-        name: "cose",
+    cy.elements().remove();
 
-        animate: true,
+    const elements = [];
 
-        animationDuration: 700,
+    graph.users.forEach(user => {
 
-        fit: true,
+        elements.push({
+            data: {
+                id: user.id.toString(),
+                label: user.id + ". " + user.name
+            }
+        });
 
-        padding: 60
+    });
 
-    },
+    graph.friendships.forEach(friendship => {
 
-    wheelSensitivity: 0.18
+        elements.push({
+            data: {
+                source: friendship.fromId.toString(),
+                target: friendship.toId.toString()
+            }
+        });
 
-});
+    });
 
-const algorithmPanel = document.querySelector(".algorithm-panel");
+    cy.add(elements);
 
-const collapseButton = document.querySelector(".collapse-btn");
-
-const collapseIcon = collapseButton.querySelector("i");
-
-collapseButton.addEventListener("click", () => {
-
-    algorithmPanel.classList.toggle("collapsed");
-
-    if (algorithmPanel.classList.contains("collapsed")) {
-
-        collapseIcon.classList.remove("bi-chevron-down");
-        collapseIcon.classList.add("bi-chevron-up");
-
-    }
-    else {
-
-        collapseIcon.classList.remove("bi-chevron-up");
-        collapseIcon.classList.add("bi-chevron-down");
-
-    }
-
-});
+    cy.layout({
+        name: "cose"
+    }).run();
+};

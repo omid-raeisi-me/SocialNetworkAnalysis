@@ -28,14 +28,12 @@ namespace SocialNetworkAnalysis.Infrastructure.Runtime
             _lock = new ReaderWriterLockSlim();
             _graphChanged = false;
             _nextIdChanged = false;
-
-            Initialize();
         }
 
-        private void Initialize()
+        public async Task InitializeAsync()
         {
-            _graph = _graphRepository.GetGraphAsync().Result ?? new SocialGraph();
-            _nextId = _settingsRepository.GetLastIdAsync().Result;
+            _graph = await _graphRepository.GetGraphAsync()?? new SocialGraph();
+            _nextId = await _settingsRepository.GetLastIdAsync();
         }
 
         public void ExecuteWrite(Action<SocialGraph> action)

@@ -19,19 +19,19 @@ namespace SocialNetworkAnalysis.Infrastructure
         public static IServiceCollection ConfigureInfrastructureServices(this IServiceCollection services, string usersJsonPath,
             string friendshipsJsonPath, string settingsJsonPath)
         {
-            services.AddScoped<IJsonStorage<List<User>>, JsonStorage<List<User>>>(p =>
+            services.AddSingleton<IJsonStorage<List<User>>, JsonStorage<List<User>>>(p =>
                                                             new JsonStorage<List<User>>(usersJsonPath));
-            services.AddScoped<IJsonStorage<List<Friendship>>, JsonStorage<List<Friendship>>>(p =>
+            services.AddSingleton<IJsonStorage<List<Friendship>>, JsonStorage<List<Friendship>>>(p =>
                                                             new JsonStorage<List<Friendship>>(friendshipsJsonPath));
-            services.AddScoped<IJsonStorage<Settings>, JsonStorage<Settings>>(p =>
+            services.AddSingleton<IJsonStorage<Settings>, JsonStorage<Settings>>(p =>
                                                             new JsonStorage<Settings>(settingsJsonPath));
 
-            services.AddScoped<IGraphRepository, GraphRepository>();
-            services.AddScoped<ISettingsRepository, SettingsRepository>();
-            services.AddScoped<IGraphMapper, GraphMapper>();
-            services.AddScoped<GraphContext, GraphContext>();
+            services.AddSingleton<IGraphRepository, GraphRepository>();
+            services.AddSingleton<ISettingsRepository, SettingsRepository>();
+            services.AddSingleton<IGraphMapper, GraphMapper>();
+            services.AddSingleton<GraphContext, GraphContext>();
 
-            services.AddScoped<IGraphRuntime, GraphRuntime>();
+            services.AddSingleton<IGraphRuntime, GraphRuntime>();
 
             return services;
         }
