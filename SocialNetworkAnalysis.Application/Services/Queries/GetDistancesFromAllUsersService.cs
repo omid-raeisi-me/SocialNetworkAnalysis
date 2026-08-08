@@ -43,6 +43,7 @@ namespace SocialNetworkAnalysis.Application.Services.Queries
 
                     responseList.Add(new UserDistanceDto
                     {
+                        Id = pair.Key,
                         Name = userName,
                         Distance = finalDistance
                     });

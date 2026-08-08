@@ -9,9 +9,6 @@ namespace SocialNetworkAnalysis.Presentation.Components.Pages
     public partial class NetworkInformation
     {
         [Inject]
-        private IJSRuntime _js { get; set; }
-
-        [Inject]
         private IGetNetworkInformationService _getNetworkInformationService { get; set; }
 
         private NetworkInformationDto _networkInformationDto = new NetworkInformationDto();
