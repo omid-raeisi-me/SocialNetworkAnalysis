@@ -20,9 +20,8 @@ namespace SocialNetworkAnalysis.Application.Services.Queries
 
         public List<UserDistanceDto> Execute(int startUserId)
         {
-            return _runtime.ExecuteRead(graph =>
-            {
-                var responseList = new List<UserDistanceDto>();
+            var graph = _runtime.Graph;
+            var responseList = new List<UserDistanceDto>();
 
                 var coreResult = _distancesAlgorithm.Execute(graph, startUserId);
 
@@ -50,7 +49,6 @@ namespace SocialNetworkAnalysis.Application.Services.Queries
                 }
 
                 return responseList;
-            });
         }
     }
 }

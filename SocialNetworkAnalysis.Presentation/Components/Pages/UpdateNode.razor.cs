@@ -23,6 +23,14 @@ namespace SocialNetworkAnalysis.Presentation.Components.Pages
 
         private string _name;
 
+        protected override async Task OnAfterRenderAsync(bool firstRender)
+        {
+            if (firstRender)
+            {
+                _name = await _js.InvokeAsync<string>("graph.getNodeName", Id);
+            }
+        }
+
         public async Task Update()
         {
             _updateUserNameService.Execute(new User()

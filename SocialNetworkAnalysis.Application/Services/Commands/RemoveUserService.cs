@@ -18,10 +18,8 @@ namespace SocialNetworkAnalysis.Application.Services.Commands
 
         public void Execute(int userId)
         {
-            _runtime.ExecuteWrite(graph =>
-            {
-                graph.RemoveUser(userId);
-            });
+            var graph = _runtime.Graph;
+            graph.RemoveUser(userId);
         }
     }
 }

@@ -21,9 +21,8 @@ namespace SocialNetworkAnalysis.Application.Services.Queries
 
         public List<User> Execute(int userAId, int userBId)
         {
-            return _runtime.ExecuteRead(graph =>
-            {
-                List<User> commonFriendsList = new();
+            var graph = _runtime.Graph;
+            List<User> commonFriendsList = new();
 
                 var coreResult = _commonNeighborsAlgorithm.Execute(graph, userAId, userBId);
 
@@ -40,7 +39,6 @@ namespace SocialNetworkAnalysis.Application.Services.Queries
                 }
 
                 return commonFriendsList;
-            });
         }
     }
 }

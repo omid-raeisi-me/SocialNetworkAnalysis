@@ -20,39 +20,47 @@ namespace SocialNetworkAnalysis.Application.Services.Queries
 
         public NetworkInformationDto Execute()
         {
-            return _runtime.ExecuteSnapshotAsync(graph =>
+            var graph = _runtime.Graph;
+
+            var coreResult = _networkInformation.Execute(graph);
+            if (coreResult == null)
+                return new NetworkInformationDto();
+
+            var response = new NetworkInformationDto
             {
-                var coreResult = _networkInformation.Execute(graph);
-                if (coreResult == null)
-                    return new NetworkInformationDto();
+                TotalUserCount = coreResult.TotalUserCount,
+                TotalFriendshipCount = coreResult.TotalFriendshipCount,
+                AverageRelationPerUser = Math.Round(coreResult.AverageRelationPerUser, 2),
+                Density = Math.Round(coreResult.density, 4),
+                Diameter = coreResult.diameter
+            };
 
-                var response = new NetworkInformationDto
+            if (coreResult.UsersWithMostFriends != null)
+            {
+                foreach (var pair in coreResult.UsersWithMostFriends)
                 {
-                    TotalUserCount = coreResult.TotalUserCount,
-                    TotalFriendshipCount = coreResult.TotalFriendshipCount,
-                    AverageRelationPerUser = Math.Round(coreResult.AverageRelationPerUser, 2),
-                    Density = Math.Round(coreResult.density, 4),
-                    Diameter = coreResult.diameter
-                };
-
-                if (coreResult.UsersWithMostFriends != null)
-                {
-                    foreach (var pair in coreResult.UsersWithMostFriends)
+                    response.Influencers.Add(new User()
                     {
-                        response.Influencers.Add(graph.GetUserName(pair.Key), pair.Value);
-                    }
-                }
+                        Id = pair.Key,
+                        Name = graph.GetUserName(pair.Key)
 
-                if (coreResult.LargestFriendshipGroup != null)
+                    }, pair.Value);
+                }
+            }
+
+            if (coreResult.LargestFriendshipGroup != null)
+            {
+                foreach (var id in coreResult.LargestFriendshipGroup)
                 {
-                    foreach (var id in coreResult.LargestFriendshipGroup)
+                    response.LargestFriendshipGroup.Add(new User()
                     {
-                        response.LargestFriendshipGroup.Add(graph.GetUserName(id));
-                    }
+                        Id = id,
+                        Name = graph.GetUserName(id)
+                    });
                 }
+            }
 
-                return response;
-            }).GetAwaiter().GetResult();
+            return response;
         }
     }
 }

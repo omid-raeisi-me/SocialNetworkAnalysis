@@ -19,9 +19,8 @@ namespace SocialNetworkAnalysis.Application.Services.Queries
 
         public WholeGraphDto Execute()
         {
-            return _runtime.ExecuteRead(graph =>
-            {
-                var response = new WholeGraphDto();
+            var graph = _runtime.Graph;
+            var response = new WholeGraphDto();
 
                 foreach (var userId in graph.GetUsers())
                 {
@@ -46,7 +45,6 @@ namespace SocialNetworkAnalysis.Application.Services.Queries
                 }
 
                 return response;
-            });
         }
     }
 }

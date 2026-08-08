@@ -19,9 +19,8 @@ namespace SocialNetworkAnalysis.Application.Services.Queries
 
         public List<User> Execute(int userId)
         {
-            return _runtime.ExecuteRead(graph =>
-            {
-                var algorithmResult = _userFriendsList.Execute(graph, userId);
+            var graph = _runtime.Graph;
+            var algorithmResult = _userFriendsList.Execute(graph, userId);
 
                 List<User> friendsList = new();
 
@@ -40,7 +39,6 @@ namespace SocialNetworkAnalysis.Application.Services.Queries
                 }
 
                 return friendsList;
-            });
         }
     }
 }

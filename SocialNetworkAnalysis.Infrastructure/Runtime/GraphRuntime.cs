@@ -21,6 +21,8 @@ namespace SocialNetworkAnalysis.Infrastructure.Runtime
         private IGraphRepository _graphRepository;
         private ISettingsRepository _settingsRepository;
 
+        public SocialGraph Graph { get { return _graph; } }
+
         public GraphRuntime(IGraphRepository graphRepository, ISettingsRepository settingsRepository)
         {
             _settingsRepository = settingsRepository;
@@ -34,53 +36,6 @@ namespace SocialNetworkAnalysis.Infrastructure.Runtime
         {
             _graph = await _graphRepository.GetGraphAsync()?? new SocialGraph();
             _lastId = await _settingsRepository.GetLastIdAsync();
-        }
-
-        public void ExecuteWrite(Action<SocialGraph> action)
-        {
-            _lock.EnterWriteLock();
-
-            try
-            {
-                _graphChanged = true;
-                action(_graph);
-            }
-            finally
-            {
-                _lock.ExitWriteLock();
-            }
-        }
-
-        public T ExecuteRead<T>(Func<SocialGraph, T> action)
-        {
-            _lock.EnterReadLock();
-
-            try
-            {
-                return action(_graph);
-            }
-            finally
-            {
-                _lock.ExitReadLock();
-            }
-        }
-
-        public async Task<T> ExecuteSnapshotAsync<T>(Func<SocialGraph, T> query)
-        {
-            SocialGraph snapshot;
-
-            _lock.EnterReadLock();
-
-            try
-            {
-                snapshot = _graph.DeepClone();
-            }
-            finally
-            {
-                _lock.ExitReadLock();
-            }
-
-            return await Task.Run(() => query(snapshot));
         }
 
         public async Task SaveAsync()

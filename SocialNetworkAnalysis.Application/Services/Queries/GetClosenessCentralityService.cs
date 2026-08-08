@@ -20,9 +20,8 @@ namespace SocialNetworkAnalysis.Application.Services.Queries
 
         public ClosenessCentralityDto Execute()
         {
-            return _runtime.ExecuteSnapshotAsync(graph =>
-            {
-                var response = new ClosenessCentralityDto();
+            var graph = _runtime.Graph;
+            var response = new ClosenessCentralityDto();
 
                 var coreResult = _closenessCentralityAlgorithm.Execute(graph);
 
@@ -53,7 +52,6 @@ namespace SocialNetworkAnalysis.Application.Services.Queries
                 response.MaxScore = Math.Round(coreResult.maxScore, 4);
 
                 return response;
-            }).GetAwaiter().GetResult();
         }
     }
 }

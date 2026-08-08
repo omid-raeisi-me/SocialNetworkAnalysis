@@ -11,9 +11,9 @@ namespace SocialNetworkAnalysis.Application.DTOs
         public int TotalUserCount { get; set; }
         public int TotalFriendshipCount { get; set; }
         public double AverageRelationPerUser { get; set; }
-        public List<string> LargestFriendshipGroup { get; set; } = new();
+        public List<User> LargestFriendshipGroup { get; set; } = new();
         public double Density { get; set; }
         public int Diameter { get; set; }
-        public Dictionary<string, int> Influencers { get; set; } = new();
+        public Dictionary<User, int> Influencers { get; set; } = new();
     }
 }

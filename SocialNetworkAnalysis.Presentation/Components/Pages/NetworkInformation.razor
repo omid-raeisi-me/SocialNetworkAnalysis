@@ -1,0 +1,116 @@
+﻿@page "/NetworkInformation"
+
+<div class="algorithm-panel collapsed">
+
+	<div class="algorithm-header">
+
+		<div class="algorithm-info">
+
+			<div class="algorithm-icon">
+				<i class="bi bi-diagram-3-fill"></i>
+			</div>
+
+			<div>
+
+				<div class="algorithm-name">
+					Network Information
+				</div>
+
+			</div>
+
+		</div>
+
+		<div class="algorithm-actions">
+
+			<button class="panel-btn collapse-btn">
+
+				<i class="bi bi-chevron-up"></i>
+
+			</button>
+
+		</div>
+
+	</div>
+
+	<div class="algorithm-body">
+
+		<div class="algorithm-content">
+
+			<div class="info-row">
+				<span>Nodes</span>
+				<span>@_networkInformationDto.TotalUserCount</span>
+			</div>
+
+			<div class="info-row">
+				<span>Edges</span>
+				<span>@_networkInformationDto.TotalFriendshipCount</span>
+			</div>
+
+			<div class="info-row">
+				<span>AverageRelation</span>
+				<span>@_networkInformationDto.AverageRelationPerUser</span>
+			</div>
+
+			<div class="info-row">
+				<span>Density</span>
+				<span>@_networkInformationDto.Density</span>
+			</div>
+
+			<div class="info-row">
+				<span>Diameter</span>
+				<span>@_networkInformationDto.Diameter</span>
+			</div>
+
+			@if (_networkInformationDto.LargestFriendshipGroup?.Any() == true)
+			{
+				<div class="friends-section">
+					<div class="friends-list">
+						<div class="info-row">
+							<span>LargestFriendshipGroup :</span>
+						</div>
+						@foreach (var item in _networkInformationDto.LargestFriendshipGroup)
+						{
+							<div class="friend-item">
+
+								<span>
+									@($"{item.Id}. {item.Name}")
+								</span>
+
+							</div>
+						}
+
+					</div>
+
+				</div>
+			}
+
+			@if (_networkInformationDto.Influencers?.Any() == true)
+			{
+				<div class="friends-section">
+					<div class="friends-list">
+						<div class="info-row">
+							<span>Influencers :</span>
+						</div>
+						@foreach (var item in _networkInformationDto.Influencers)
+						{
+							<div class="friend-item">
+
+								<span>
+									@($"{item.Key.Id}. {item.Key.Name} : {item.Value}")
+								</span>
+
+							</div>
+						}
+
+					</div>
+
+				</div>
+			}
+
+		</div>
+
+	</div>
+
+</div>
+
+<script src="/assets/js/pages.js"></script>

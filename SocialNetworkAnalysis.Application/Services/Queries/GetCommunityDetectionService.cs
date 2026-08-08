@@ -20,9 +20,8 @@ namespace SocialNetworkAnalysis.Application.Services.Queries
 
         public CommunityDetectionDto Execute()
         {
-            return _runtime.ExecuteSnapshotAsync(graph =>
-            {
-                CommunityDetectionDto response = new();
+            var graph = _runtime.Graph;
+            CommunityDetectionDto response = new();
 
                 var coreResult = _communityDetectionAlgorithm.Execute(graph);
 
@@ -57,7 +56,6 @@ namespace SocialNetworkAnalysis.Application.Services.Queries
                 }
 
                 return response;
-            }).GetAwaiter().GetResult();
         }
     }
 }

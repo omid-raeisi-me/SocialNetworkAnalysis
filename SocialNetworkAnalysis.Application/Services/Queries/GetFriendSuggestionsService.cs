@@ -20,9 +20,8 @@ namespace SocialNetworkAnalysis.Application.Services.Queries
 
         public FriendSuggestionDto Execute(int userId, int topK = 5)
         {
-            return _runtime.ExecuteSnapshotAsync(graph =>
-            {
-                FriendSuggestionDto appResult = new();
+            var graph = _runtime.Graph;
+            FriendSuggestionDto appResult = new();
 
                 var coreResult = _linkPrediction.Execute(graph, userId, topK);
 
@@ -65,7 +64,6 @@ namespace SocialNetworkAnalysis.Application.Services.Queries
                 }
 
                 return appResult;
-            }).GetAwaiter().GetResult();
         }
     }
 }

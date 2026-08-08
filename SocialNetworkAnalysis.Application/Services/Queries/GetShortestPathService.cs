@@ -21,9 +21,8 @@ namespace SocialNetworkAnalysis.Application.Services.Queries
 
         public List<User> Execute(int startUserId, int targetUserId)
         {
-            return _runtime.ExecuteRead(graph =>
-            {
-                List<User> finalPath = new();
+            var graph = _runtime.Graph;
+            List<User> finalPath = new();
 
                 var result = _shortestPathAlgorithm.Execute(graph, startUserId, targetUserId);
 
@@ -40,7 +39,6 @@ namespace SocialNetworkAnalysis.Application.Services.Queries
                 }
 
                 return finalPath;
-            });
         }
     }
 }

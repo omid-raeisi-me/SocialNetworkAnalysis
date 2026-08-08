@@ -19,10 +19,8 @@ namespace SocialNetworkAnalysis.Application.Services.Commands
 
         public void Execute(User user)
         {
-            _runtime.ExecuteWrite(graph =>
-            {
-                graph.UpdateUserName(user.Id, user.Name);
-            });
+            var graph = _runtime.Graph;
+            graph.UpdateUserName(user.Id, user.Name);
         }
     }
 }

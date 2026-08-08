@@ -19,10 +19,8 @@ namespace SocialNetworkAnalysis.Application.Services.Commands
 
         public void Execute(Friendship friendship)
         {
-            _runtime.ExecuteWrite(graph =>
-            {
-                graph.RemoveFriendship(friendship.FromId, friendship.ToId);
-            });
+            var graph = _runtime.Graph;
+            graph.RemoveFriendship(friendship.FromId, friendship.ToId);
         }
     }
 }

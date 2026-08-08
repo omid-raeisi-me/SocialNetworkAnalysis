@@ -86,7 +86,7 @@ namespace SocialNetworkAnalysis.Presentation.Components.Layout
                 Id = id,
                 Name = name,
                 Degree = friends.Count(),
-                Friends = friends.Select(f => f.Name).ToList()
+                Friends = friends
             };
         }
 
@@ -146,9 +146,7 @@ namespace SocialNetworkAnalysis.Presentation.Components.Layout
         {
             _showSearchResults = false;
 
-            await _js.InvokeVoidAsync(
-                "graph.selectSearchNode",
-                id);
+            await _js.InvokeVoidAsync("graph.selectSearchNode", id);
         }
 
         private void ClearSearch()
@@ -163,6 +161,8 @@ namespace SocialNetworkAnalysis.Presentation.Components.Layout
             _removeUserService.Execute(_selectedNodeId);
             var graph = _getWholeGraphService.Execute();
             await _js.InvokeVoidAsync("graph.loadGraph", graph);
+
+            ClosePanel();
         }
 
         private async Task Save()

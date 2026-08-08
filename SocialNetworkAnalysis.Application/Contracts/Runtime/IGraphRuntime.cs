@@ -9,10 +9,8 @@ namespace SocialNetworkAnalysis.Application.Contracts.Runtime
 {
     public interface IGraphRuntime
     {
+        SocialGraph Graph { get; }
         Task InitializeAsync();
-        void ExecuteWrite(Action<SocialGraph> action);
-        T ExecuteRead<T>(Func<SocialGraph, T> action);
-        Task<T> ExecuteSnapshotAsync<T>(Func<SocialGraph, T> query);
         int GenerateId();
         Task SaveAsync();
     }

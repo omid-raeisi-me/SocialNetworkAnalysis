@@ -20,41 +20,39 @@ namespace SocialNetworkAnalysis.Application.Services.Queries
 
         public BetweennessCentralityDto Execute()
         {
-            return _runtime.ExecuteSnapshotAsync(graph =>
-            {
-                var response = new BetweennessCentralityDto();
+            var graph = _runtime.Graph;
+            var response = new BetweennessCentralityDto();
 
-                var coreResult = _betweennessCentralityAlgorithm.Execute(graph);
+            var coreResult = _betweennessCentralityAlgorithm.Execute(graph);
 
-                if (coreResult == null)
-                    return response;
-
-                if (coreResult.mostInfluentialNodes != null)
-                {
-                    foreach (var nodeId in coreResult.mostInfluentialNodes)
-                    {
-                        response.MostInfluentialNodes.Add(graph.GetUserName(nodeId));
-                    }
-                }
-
-                if (coreResult.centralityScores != null)
-                {
-                    var sortedScores = coreResult.centralityScores
-                        .OrderByDescending(x => x.Value)
-                        .ToList();
-
-                    foreach (var pair in sortedScores)
-                    {
-                        string userName = graph.GetUserName(pair.Key);
-                        double roundedScore = Math.Round(pair.Value, 4);
-                        response.CentralityScores.Add(userName, roundedScore);
-                    }
-                }
-
-                response.MaxScore = Math.Round(coreResult.maxScore, 4);
-
+            if (coreResult == null)
                 return response;
-            }).GetAwaiter().GetResult();
+
+            if (coreResult.mostInfluentialNodes != null)
+            {
+                foreach (var nodeId in coreResult.mostInfluentialNodes)
+                {
+                    response.MostInfluentialNodes.Add(graph.GetUserName(nodeId));
+                }
+            }
+
+            if (coreResult.centralityScores != null)
+            {
+                var sortedScores = coreResult.centralityScores
+                    .OrderByDescending(x => x.Value)
+                    .ToList();
+
+                foreach (var pair in sortedScores)
+                {
+                    string userName = graph.GetUserName(pair.Key);
+                    double roundedScore = Math.Round(pair.Value, 4);
+                    response.CentralityScores.Add(userName, roundedScore);
+                }
+            }
+
+            response.MaxScore = Math.Round(coreResult.maxScore, 4);
+
+            return response;
         }
     }
 }

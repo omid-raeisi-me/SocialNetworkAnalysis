@@ -20,9 +20,8 @@ namespace SocialNetworkAnalysis.Application.Services.Queries
 
         public NetworkGroupsDto Execute()
         {
-            return _runtime.ExecuteRead(graph =>
-            {
-                NetworkGroupsDto appResult = new();
+            var graph = _runtime.Graph;
+            NetworkGroupsDto appResult = new();
 
                 var coreResult = _connectedComponents.Execute(graph);
 
@@ -50,7 +49,6 @@ namespace SocialNetworkAnalysis.Application.Services.Queries
                 }
 
                 return appResult;
-            });
         }
     }
 }
