@@ -1,0 +1,76 @@
+﻿@page "/NetworkGroup"
+
+<div class="algorithm-panel collapsed">
+
+	<div class="algorithm-header">
+
+		<div class="algorithm-info">
+
+			<div class="algorithm-icon">
+				<i class="bi bi-diagram-3"></i>
+			</div>
+
+			<div>
+
+				<div class="algorithm-name">
+					Network Groups
+				</div>
+
+			</div>
+
+		</div>
+
+		<div class="algorithm-actions">
+
+			<button class="panel-btn collapse-btn">
+
+				<i class="bi bi-chevron-up"></i>
+
+			</button>
+
+		</div>
+
+	</div>
+
+	<div class="algorithm-body">
+
+		<div class="algorithm-content">
+
+			<div class="info-row">
+				<span>TotalGroups</span>
+				<span>@_networkGroupsDto.TotalGroups</span>
+			</div>
+
+			@if (_networkGroupsDto.Groups?.Any() == true)
+			{
+				@foreach (var group in _networkGroupsDto.Groups)
+				{
+					<div class="friends-section">
+						<div class="friends-list">
+							<div class="info-row">
+								<span>Group @group.GroupId :</span>
+							</div>
+							@foreach (var item in group.Members)
+							{
+								<div class="friend-item">
+
+									<span>
+										@($"{item.Id}. {item.Name}")
+									</span>
+
+								</div>
+							}
+
+						</div>
+
+					</div>
+				}
+			}
+
+		</div>
+
+	</div>
+
+</div>
+
+<script src="/assets/js/pages.js"></script>

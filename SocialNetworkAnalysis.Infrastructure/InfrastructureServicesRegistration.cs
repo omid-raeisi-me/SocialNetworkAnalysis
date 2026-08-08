@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using SocialNetworkAnalysis.Application.Abstractions;
+using SocialNetworkAnalysis.Application.Models;
 using SocialNetworkAnalysis.Application.Services.Commands;
 using SocialNetworkAnalysis.Application.Services.Queries;
 using SocialNetworkAnalysis.Infrastructure.Runtime;

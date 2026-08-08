@@ -8,8 +8,8 @@ namespace SocialNetworkAnalysis.Application.DTOs
 {
     public class ClosenessCentralityDto
     {
-        public Dictionary<string, double> ClosenessScores { get; set; } = new();
-        public List<string> CentralityNodes { get; set; } = new();
+        public Dictionary<User, double> ClosenessScores { get; set; } = new();
+        public List<User> CentralityNodes { get; set; } = new();
         public double MaxScore { get; set; }
     }
 }

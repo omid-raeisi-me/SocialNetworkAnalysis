@@ -1,0 +1,75 @@
+﻿@page "/ImportGraph"
+
+<div class="algorithm-panel collapsed" style="max-height:300px;">
+
+	<div class="algorithm-header">
+
+		<div class="algorithm-info">
+
+			<div class="algorithm-icon">
+				<i class="bi bi-cloud-arrow-up"></i>
+			</div>
+
+			<div>
+
+				<div class="algorithm-name">
+					Import Graph
+				</div>
+
+			</div>
+
+		</div>
+
+		<div class="algorithm-actions">
+
+			<button class="panel-btn collapse-btn">
+
+				<i class="bi bi-chevron-up"></i>
+
+			</button>
+
+		</div>
+
+	</div>
+
+	<div class="algorithm-body">
+
+		<div class="algorithm-content">
+
+			<div class="panel-section">
+
+				<label class="form-label">
+					Graph file
+				</label>
+
+				<InputFile OnChange="OnFileChangeAsync"
+						   accept=".txt"
+						   class="form-control" />
+
+			</div>
+
+			@if (!string.IsNullOrWhiteSpace(_importGraphState.FileName))
+			{
+				<div class="mt-2">
+					<small class="text-muted">
+						Selected: @_importGraphState.FileName
+					</small>
+				</div>
+			}
+		</div>
+
+		<div class="algorithm-footer">
+
+			<button type="button"
+					class="btn btn-primary w-100"
+					@onclick="Import">
+					<i class="bi bi-upload me-1"></i>
+					<span>Import</span>
+			</button>
+
+		</div>
+
+	</div>
+</div>
+
+<script src="/assets/js/pages.js"></script>

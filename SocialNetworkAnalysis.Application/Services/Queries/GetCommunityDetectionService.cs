@@ -23,39 +23,47 @@ namespace SocialNetworkAnalysis.Application.Services.Queries
             var graph = _runtime.Graph;
             CommunityDetectionDto response = new();
 
-                var coreResult = _communityDetectionAlgorithm.Execute(graph);
+            var coreResult = _communityDetectionAlgorithm.Execute(graph);
 
-                if (coreResult == null) return response;
+            if (coreResult == null) return response;
 
-                if (coreResult.LocalCommunities != null)
+            if (coreResult.LocalCommunities != null)
+            {
+                foreach (var coreGroup in coreResult.LocalCommunities)
                 {
-                    foreach (var coreGroup in coreResult.LocalCommunities)
+                    var group = new List<User>();
+                    foreach (var userId in coreGroup)
                     {
-                        var nameGroup = new List<string>();
-                        foreach (var userId in coreGroup)
+                        group.Add(new User()
                         {
-                            nameGroup.Add(graph.GetUserName(userId));
-                        }
-                        response.LocalCommunities.Add(nameGroup);
+                            Id = userId,
+                            Name = graph.GetUserName(userId)
+                        });
                     }
-                    response.LocalCommunitiesCount = coreResult.LocalCommunitiesCount;
+                    response.LocalCommunities.Add(group);
                 }
+                response.LocalCommunitiesCount = coreResult.LocalCommunitiesCount;
+            }
 
-                if (coreResult.GlobalCommunities != null)
+            if (coreResult.GlobalCommunities != null)
+            {
+                foreach (var coreGroup in coreResult.GlobalCommunities)
                 {
-                    foreach (var coreGroup in coreResult.GlobalCommunities)
+                    var group = new List<User>();
+                    foreach (var userId in coreGroup)
                     {
-                        var nameGroup = new List<string>();
-                        foreach (var userId in coreGroup)
+                        group.Add(new User()
                         {
-                            nameGroup.Add(graph.GetUserName(userId));
-                        }
-                        response.GlobalCommunities.Add(nameGroup);
+                            Id = userId,
+                            Name = graph.GetUserName(userId)
+                        });
                     }
-                    response.GlobalCommunitiesCount = coreResult.GlobalCommunitiesCount;
+                    response.GlobalCommunities.Add(group);
                 }
+                response.GlobalCommunitiesCount = coreResult.GlobalCommunitiesCount;
+            }
 
-                return response;
+            return response;
         }
     }
 }

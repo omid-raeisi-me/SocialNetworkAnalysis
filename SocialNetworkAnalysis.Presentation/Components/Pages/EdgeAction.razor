@@ -1,6 +1,6 @@
-﻿@page "/InsertNode"
+﻿@page "/EdgeAction"
 
-<div class="algorithm-panel collapsed" style="max-height:230px">
+<div class="algorithm-panel collapsed" style="max-height:285px">
 
 	<div class="algorithm-header">
 
@@ -13,7 +13,7 @@
 			<div>
 
 				<div class="algorithm-name">
-					Add Node
+					Edge Action
 				</div>
 
 			</div>
@@ -39,8 +39,16 @@
 			<div class="panel-section">
 
 				<input class="form-control"
-					   placeholder="Name"
-					   @bind="_name"/>
+					   placeholder="From Id"
+					   @bind="_fromId" />
+
+			</div>
+
+			<div class="panel-section">
+
+				<input class="form-control"
+					   placeholder="To Id"
+					   @bind="_toId" />
 
 			</div>
 
@@ -48,13 +56,27 @@
 
 		<div class="algorithm-footer">
 
-			<button class="btn btn-success w-100" @onclick="Add">
+			<div class="row">
+				<div class="col-6">
+					<button class="btn btn-success w-100" @onclick="Add">
 
-				<i class="bi bi-person-add"></i>
+						<i class="bi bi-share"></i>
 
-				Add
+						Add
 
-			</button>
+					</button>
+				</div>
+
+				<div class="col-6">
+					<button class="btn btn-danger w-100" @onclick="Remove">
+
+						<i class="bi bi-trash"></i>
+
+						Remove
+
+					</button>
+				</div>
+			</div>
 
 		</div>
 

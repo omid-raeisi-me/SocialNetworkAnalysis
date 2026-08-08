@@ -8,8 +8,8 @@ namespace SocialNetworkAnalysis.Application.DTOs
 {
     public class BetweennessCentralityDto
     {
-        public Dictionary<string, double> CentralityScores { get; set; } = new();
-        public List<string> MostInfluentialNodes { get; set; } = new();
+        public Dictionary<User, double> CentralityScores { get; set; } = new();
+        public List<User> MostInfluentialNodes { get; set; } = new();
         public double MaxScore { get; set; }
     }
 }

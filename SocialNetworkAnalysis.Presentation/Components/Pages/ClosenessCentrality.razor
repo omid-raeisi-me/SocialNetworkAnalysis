@@ -1,4 +1,4 @@
-﻿@page "/NetworkInformation"
+﻿@page "/ClosenessCentrality"
 
 <div class="algorithm-panel collapsed">
 
@@ -7,13 +7,13 @@
 		<div class="algorithm-info">
 
 			<div class="algorithm-icon">
-				<i class="bi bi-info-circle"></i>
+				<i class="bi bi-bullseye"></i>
 			</div>
 
 			<div>
 
 				<div class="algorithm-name">
-					Network Information
+					Closeness Centrality
 				</div>
 
 			</div>
@@ -37,38 +37,18 @@
 		<div class="algorithm-content">
 
 			<div class="info-row">
-				<span>Nodes</span>
-				<span>@_networkInformationDto.TotalUserCount</span>
+				<span>Max Score :</span>
+				<span>@_closenessCentralityDto.MaxScore</span>
 			</div>
 
-			<div class="info-row">
-				<span>Edges</span>
-				<span>@_networkInformationDto.TotalFriendshipCount</span>
-			</div>
-
-			<div class="info-row">
-				<span>AverageRelation</span>
-				<span>@_networkInformationDto.AverageRelationPerUser</span>
-			</div>
-
-			<div class="info-row">
-				<span>Density</span>
-				<span>@_networkInformationDto.Density</span>
-			</div>
-
-			<div class="info-row">
-				<span>Diameter</span>
-				<span>@_networkInformationDto.Diameter</span>
-			</div>
-
-			@if (_networkInformationDto.LargestFriendshipGroup?.Any() == true)
+			@if (_closenessCentralityDto.CentralityNodes?.Any() == true)
 			{
 				<div class="friends-section">
 					<div class="friends-list">
 						<div class="info-row">
-							<span>LargestFriendshipGroup :</span>
+							<span>Centrality :</span>
 						</div>
-						@foreach (var item in _networkInformationDto.LargestFriendshipGroup)
+						@foreach (var item in _closenessCentralityDto.CentralityNodes)
 						{
 							<div class="friend-item">
 
@@ -78,20 +58,19 @@
 
 							</div>
 						}
-
 					</div>
 
 				</div>
 			}
 
-			@if (_networkInformationDto.Influencers?.Any() == true)
+			@if (_closenessCentralityDto.ClosenessScores?.Any() == true)
 			{
 				<div class="friends-section">
 					<div class="friends-list">
 						<div class="info-row">
-							<span>Influencers :</span>
+							<span>Closeness Scores :</span>
 						</div>
-						@foreach (var item in _networkInformationDto.Influencers)
+						@foreach (var item in _closenessCentralityDto.ClosenessScores)
 						{
 							<div class="friend-item">
 
@@ -101,7 +80,6 @@
 
 							</div>
 						}
-
 					</div>
 
 				</div>

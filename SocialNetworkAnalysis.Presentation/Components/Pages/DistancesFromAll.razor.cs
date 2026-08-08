@@ -6,17 +6,19 @@ namespace SocialNetworkAnalysis.Presentation.Components.Pages
 {
     public partial class DistancesFromAll
     {
-        [Parameter]
-        public int Id { get; set; }
-
         [Inject]
         private IGetDistancesFromAllUsersService _getDistancesFromAllUsersService { get; set; }
 
+        private string _nodeId = "";
         private List<UserDistanceDto>  _userDistanceDtos = new();
 
-        protected override void OnInitialized()
+        protected void Run()
         {
-            _userDistanceDtos = _getDistancesFromAllUsersService.Execute(Id);
+            try
+            {
+                _userDistanceDtos = _getDistancesFromAllUsersService.Execute(int.Parse(_nodeId));
+            }
+            catch { }
         }
     }
 }

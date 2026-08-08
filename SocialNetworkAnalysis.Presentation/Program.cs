@@ -4,6 +4,7 @@ using SocialNetworkAnalysis.Presentation.Components;
 using SocialNetworkAnalysis.Application;
 using SocialNetworkAnalysis.Infrastructure;
 using SocialNetworkAnalysis.Core;
+using SocialNetworkAnalysis.Presentation.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -18,6 +19,8 @@ var settingsJsonPath = Path.Combine(builder.Environment.ContentRootPath, "Data",
 builder.Services.ConfigureCoreServices();
 builder.Services.ConfigureInfrastructureServices(usersJsonPath, friendshipsJsonPath, settingsJsonPath);
 builder.Services.ConfigureApplicationServices();
+
+builder.Services.AddScoped<ImportGraphState>();
 
 var app = builder.Build();
 

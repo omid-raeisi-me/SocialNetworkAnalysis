@@ -31,6 +31,7 @@ namespace SocialNetworkAnalysis.Application
             services.AddScoped<IRemoveUserService, RemoveUserService>();
             services.AddScoped<IUpdateUserNameService, UpdateUserNameService>();
             services.AddScoped<ISaveGraphService, SaveGraphService>();
+            services.AddScoped<IImportGraphService, ImportGraphService>();
 
             return services;
         }

@@ -1,4 +1,4 @@
-﻿@page "/FriendSuggestion/{Id:int}"
+﻿@page "/FriendSuggestion"
 
 <div class="algorithm-panel collapsed">
 
@@ -7,7 +7,7 @@
 		<div class="algorithm-info">
 
 			<div class="algorithm-icon">
-				<i class="bi bi-diagram-3-fill"></i>
+				<i class="bi bi-person-plus"></i>
 			</div>
 
 			<div>
@@ -35,6 +35,14 @@
 	<div class="algorithm-body">
 
 		<div class="algorithm-content">
+
+			<div class="panel-section">
+
+				<input class="form-control"
+					   placeholder="Node Id"
+					   @bind="_nodeId" />
+
+			</div>
 
 			<div class="panel-section">
 
@@ -108,6 +116,13 @@
 
 					</div>
 				</div>
+			}
+
+			@if (_friendSuggestionDto.Jaccard?.Any() == false &&
+					_friendSuggestionDto.AdamicAdar?.Any() == false &&
+					_friendSuggestionDto.CommonNeighbors?.Any() == false)
+			{
+				<span>There are no items to display.</span>
 			}
 
 		</div>

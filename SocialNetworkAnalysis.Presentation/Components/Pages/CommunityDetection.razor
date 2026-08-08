@@ -1,0 +1,119 @@
+﻿@page "/CommunityDetection"
+
+<div class="algorithm-panel collapsed">
+
+	<div class="algorithm-header">
+
+		<div class="algorithm-info">
+
+			<div class="algorithm-icon">
+				<i class="bi bi-bezier2"></i>
+			</div>
+
+			<div>
+
+				<div class="algorithm-name">
+					Community Detection
+				</div>
+
+			</div>
+
+		</div>
+
+		<div class="algorithm-actions">
+
+			<button class="panel-btn collapse-btn">
+
+				<i class="bi bi-chevron-up"></i>
+
+			</button>
+
+		</div>
+
+	</div>
+
+	<div class="algorithm-body">
+
+		<div class="algorithm-content">
+
+			<h4>Local :</h4>
+
+			<div class="info-row">
+				<span>Local Communities Count</span>
+				<span>@_communityDetectionDto.LocalCommunitiesCount</span>
+			</div>
+
+			@if (_communityDetectionDto.LocalCommunities?.Any() == true)
+			{
+				int i = 1;
+				@foreach (var community in _communityDetectionDto.LocalCommunities)
+				{
+					<div class="friends-section">
+						<div class="friends-list">
+							<div class="info-row">
+								<span>Group @i :</span>
+							</div>
+							@foreach (var item in community)
+							{
+								<div class="friend-item">
+
+									<span>
+										@($"{item.Id}. {item.Name}")
+									</span>
+
+								</div>
+							}
+
+						</div>
+
+					</div>
+
+					i++;
+				}
+			}
+
+			<hr />
+
+			<h4>Global :</h4>
+
+			<div class="info-row">
+				<span>Gloabal Communities Count</span>
+				<span>@_communityDetectionDto.GlobalCommunitiesCount</span>
+			</div>
+
+			@if (_communityDetectionDto.GlobalCommunities?.Any() == true)
+			{
+				int i = 1;
+				@foreach (var community in _communityDetectionDto.GlobalCommunities)
+				{
+					<div class="friends-section">
+						<div class="friends-list">
+							<div class="info-row">
+								<span>Group @i :</span>
+							</div>
+							@foreach (var item in community)
+							{
+								<div class="friend-item">
+
+									<span>
+										@($"{item.Id}. {item.Name}")
+									</span>
+
+								</div>
+							}
+
+						</div>
+
+					</div>
+
+					i++;
+				}
+			}
+
+		</div>
+
+	</div>
+
+</div>
+
+<script src="/assets/js/pages.js"></script>

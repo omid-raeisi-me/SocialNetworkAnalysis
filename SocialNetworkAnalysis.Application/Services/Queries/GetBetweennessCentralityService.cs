@@ -32,7 +32,11 @@ namespace SocialNetworkAnalysis.Application.Services.Queries
             {
                 foreach (var nodeId in coreResult.mostInfluentialNodes)
                 {
-                    response.MostInfluentialNodes.Add(graph.GetUserName(nodeId));
+                    response.MostInfluentialNodes.Add(new User()
+                    {
+                        Name = graph.GetUserName(nodeId),
+                        Id = nodeId
+                    });
                 }
             }
 
@@ -46,7 +50,12 @@ namespace SocialNetworkAnalysis.Application.Services.Queries
                 {
                     string userName = graph.GetUserName(pair.Key);
                     double roundedScore = Math.Round(pair.Value, 4);
-                    response.CentralityScores.Add(userName, roundedScore);
+                    response.CentralityScores.Add(new User()
+                    {
+                        Name = userName,
+                        Id = pair.Key,
+
+                    }, roundedScore);
                 }
             }
 

@@ -29,6 +29,9 @@ namespace SocialNetworkAnalysis.Presentation.Components.Layout
         [Inject]
         private IRemoveUserService _removeUserService { get; set; }
 
+        [Inject]
+        private IGetNetworkInformationService _getNetworkInformationService { get; set; }
+
         private DotNetObjectReference<GraphLayout>? _reference;
         private UserInfo? _selectedNode;
         private double _panelX;
@@ -45,6 +48,9 @@ namespace SocialNetworkAnalysis.Presentation.Components.Layout
         private List<User> _searchResults = new();
         private bool _showSearchResults;
 
+        private int _edgeCount;
+        private int _nodeCount;
+
         protected override async Task OnAfterRenderAsync(bool firstRender)
         {
             if (firstRender)
@@ -54,8 +60,15 @@ namespace SocialNetworkAnalysis.Presentation.Components.Layout
                 await _js.InvokeVoidAsync("graph.loadGraph", graph);
 
                 _reference = DotNetObjectReference.Create(this);
-                await _js.InvokeVoidAsync("graph.registerNodeClick",_reference);
+                await _js.InvokeVoidAsync("graph.registerNodeClick", _reference);
             }
+        }
+
+        protected override void OnInitialized()
+        {
+            var info = _getNetworkInformationService.Execute();
+            _nodeCount = info.TotalUserCount;
+            _edgeCount = info.TotalFriendshipCount;
         }
 
         [JSInvokable]
@@ -78,7 +91,7 @@ namespace SocialNetworkAnalysis.Presentation.Components.Layout
 
         private async Task<UserInfo> LoadUser(int id)
         {
-            var name = await _js.InvokeAsync<string>("graph.getNodeName",id);
+            var name = await _js.InvokeAsync<string>("graph.getNodeName", id);
             var friends = _getUserFriendsService.Execute(id);
 
             return new UserInfo()
@@ -167,7 +180,7 @@ namespace SocialNetworkAnalysis.Presentation.Components.Layout
 
         private async Task Save()
         {
-           await _saveGraphService.ExecuteAsync();
+            await _saveGraphService.ExecuteAsync();
         }
     }
 }

@@ -1,4 +1,4 @@
-﻿@page "/DistancesFromAll/{Id:int}"
+﻿@page "/DistanceFromAll"
 
 <div class="algorithm-panel collapsed">
 
@@ -7,7 +7,7 @@
 		<div class="algorithm-info">
 
 			<div class="algorithm-icon">
-				<i class="bi bi-diagram-3-fill"></i>
+				<i class="bi bi-diagram-2"></i>
 			</div>
 
 			<div>
@@ -36,6 +36,14 @@
 
 		<div class="algorithm-content">
 
+			<div class="panel-section">
+
+				<input class="form-control"
+					   placeholder="Selected Node Id"
+					   @bind="_nodeId" />
+
+			</div>
+
 			@if (_userDistanceDtos?.Any() == true)
 			{
 				<div class="friends-section">
@@ -58,6 +66,18 @@
 
 				</div>
 			}
+
+		</div>
+
+		<div class="algorithm-footer">
+
+			<button class="btn btn-primary w-100" @onclick="Run">
+
+				<i class="bi bi-play-fill"></i>
+
+				Run
+
+			</button>
 
 		</div>
 

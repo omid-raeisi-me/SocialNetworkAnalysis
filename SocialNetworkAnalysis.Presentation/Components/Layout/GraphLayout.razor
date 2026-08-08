@@ -7,7 +7,7 @@
 	<div class="admin-main">
 
 		<main class="dashboard-content">
-			<div class="graph-page">
+			<div class="graph-page" style="padding-left : 35px;">
 
 				<div class="graph-card">
 
@@ -20,22 +20,15 @@
 								Node
 							</a>
 
-							<button class="btn btn-outline-primary btn-sm">
+							<a class="btn btn-outline-primary btn-sm" href="/EdgeAction">
 								<i class="bi bi-share"></i>
 								Edge
-							</button>
+							</a>
 
 							<button class="btn btn-outline-primary btn-sm" @onclick="Save">
 								<i class="bi bi-save"></i>
 								Save
 							</button>
-
-							<div class="toolbar-divider"></div>
-
-							<button class="btn btn-light btn-sm">
-								<i class="bi bi-bounding-box"></i>
-							</button>
-
 						</div>
 
 						<div class="toolbar-right">
@@ -66,7 +59,7 @@
 													</div>
 													<div class="search-result-info">
 														<span class="search-result-name"> @result.Name </span>
-														<span class="search-result-id"> ID: @result.Id </span>
+														<span class="search-result-id"> ID : @result.Id </span>
 													</div>
 												</button>
 											}
@@ -88,7 +81,7 @@
 
 							<div class="node-panel-header">
 
-								<span>@_selectedNode.Name</span>
+								<span>Information</span>
 
 								<button class="close-btn"
 										@onclick="ClosePanel">
@@ -148,7 +141,7 @@
 						<div class="context-menu"
 							 style="left:@($"{_menuX}px"); top:@($"{_menuY}px");">
 
-							<div class="panel-header" style="margin :  0px !important;">
+							<div class="panel-header" style="margin : 0px !important; padding-top: 0px; padding-bottom: 0px;">
 
 								<div class="panel-title">
 
@@ -172,16 +165,6 @@
 									<i class="bi bi-trash"></i>
 									Delete
 								</a>
-
-								<a class="btn btn-info" style="width:100%;" href="/DistancesFromAll/@_selectedNodeId">
-									<i class="bi bi-trash"></i>
-									Distance
-								</a>
-
-								<a class="btn btn-info" style="width:100%;" href="/FriendSuggestion/@_selectedNodeId">
-									<i class="bi bi-trash"></i>
-									Friend Suggestion
-								</a>
 							</div>
 
 						</div>
@@ -191,14 +174,11 @@
 
 					<div class="graph-status">
 
-						<span>Nodes : 0</span>
-
-						<span>Edges : 0</span>
+						<span>Nodes : @_nodeCount</span>
+						<span>Edges : @_edgeCount</span>
 
 					</div>
-
 				</div>
-
 			</div>
 		</main>
 	</div>
