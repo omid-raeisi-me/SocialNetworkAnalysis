@@ -1,0 +1,106 @@
+﻿@page "/ShortPath"
+
+<div class="algorithm-panel collapsed">
+
+	<div class="algorithm-header">
+
+		<div class="algorithm-info">
+
+			<div class="algorithm-icon">
+				<i class="bi bi-diagram-3-fill"></i>
+			</div>
+
+			<div>
+
+				<div class="algorithm-name">
+					Short Path
+				</div>
+
+			</div>
+
+		</div>
+
+		<div class="algorithm-actions">
+
+			<button class="panel-btn collapse-btn">
+
+				<i class="bi bi-chevron-up"></i>
+
+			</button>
+
+		</div>
+
+	</div>
+
+	<div class="algorithm-body">
+
+		<div class="algorithm-content">
+
+			<div class="panel-section">
+
+				<input class="form-control"
+				placeholder="Start Node Id"
+				@bind="_startNodeId" />
+
+			</div>
+
+			<div class="panel-section">
+
+				<input class="form-control"
+				placeholder="End Node Id"
+				@bind="_endNodeId" />
+
+			</div>
+
+			@if(_shortPathFound == 0)
+			{
+				<h3>Path Is Not Exist ...</h3>
+			}
+			else if(_shortPathFound == 1)
+			{
+				<h3>Path Is Exist ...</h3>
+			}
+
+			@if (_shortPath?.Any() == true)
+			{
+				
+
+				<div class="friends-section">
+					<div class="friends-list">
+						<div class="info-row">
+							<span>Path :</span>
+						</div>
+						@foreach (var item in _shortPath)
+						{
+							<div class="friend-item">
+
+								<span>
+									@($"{item.Id}. {item.Name}")
+								</span>
+
+							</div>
+						}
+
+					</div>
+				</div>
+			}
+
+		</div>
+
+		<div class="algorithm-footer">
+
+			<button class="btn btn-primary w-100" @onclick="Run">
+
+				<i class="bi bi-play-fill"></i>
+
+				Run
+
+			</button>
+
+		</div>
+
+	</div>
+
+</div>
+
+<script src="/assets/js/pages.js"></script>

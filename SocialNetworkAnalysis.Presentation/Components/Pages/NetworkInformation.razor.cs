@@ -14,9 +14,6 @@ namespace SocialNetworkAnalysis.Presentation.Components.Pages
         [Inject]
         private IGetNetworkInformationService _getNetworkInformationService { get; set; }
 
-        [Inject]
-        private IGetWholeGraphService _getWholeGraphService { get; set; }
-
         private NetworkInformationDto _networkInformationDto = new NetworkInformationDto();
 
         protected override void OnInitialized()
