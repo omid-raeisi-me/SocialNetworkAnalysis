@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using SocialNetworkAnalysis.Application.Abstractions.Queries;
 
 namespace SocialNetworkAnalysis.Application.Services.Queries
 {
@@ -17,11 +18,11 @@ namespace SocialNetworkAnalysis.Application.Services.Queries
             _closenessCentralityAlgorithm = closenessCentralityAlgorithm;
         }
 
-        public ClosenessCentralityResponse Execute()
+        public ClosenessCentralityDto Execute()
         {
             return _runtime.ExecuteSnapshotAsync(graph =>
             {
-                var response = new ClosenessCentralityResponse();
+                var response = new ClosenessCentralityDto();
 
                 var coreResult = _closenessCentralityAlgorithm.Execute(graph);
 

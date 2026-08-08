@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using SocialNetworkAnalysis.Application.Abstractions.Queries;
 
 namespace SocialNetworkAnalysis.Application.Services.Queries
 {
@@ -17,11 +18,11 @@ namespace SocialNetworkAnalysis.Application.Services.Queries
             _connectedComponents = connectedComponents;
         }
 
-        public NetworkGroupsResponse Execute()
+        public NetworkGroupsDto Execute()
         {
             return _runtime.ExecuteRead(graph =>
             {
-                NetworkGroupsResponse appResult = new();
+                NetworkGroupsDto appResult = new();
 
                 var coreResult = _connectedComponents.Execute(graph);
 

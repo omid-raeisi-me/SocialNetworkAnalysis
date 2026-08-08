@@ -4,7 +4,6 @@ using SocialNetworkAnalysis.Presentation.Components;
 using SocialNetworkAnalysis.Application;
 using SocialNetworkAnalysis.Infrastructure;
 using SocialNetworkAnalysis.Core;
-using SocialNetworkAnalysis.Presentation.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 

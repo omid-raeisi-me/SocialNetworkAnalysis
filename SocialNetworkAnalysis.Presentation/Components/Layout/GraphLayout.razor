@@ -15,14 +15,19 @@
 
 						<div class="toolbar-left">
 
-							<button class="btn btn-primary btn-sm">
+							<a class="btn btn-primary btn-sm" href="/InsertNode">
 								<i class="bi bi-plus-lg"></i>
 								Node
-							</button>
+							</a>
 
 							<button class="btn btn-outline-primary btn-sm">
 								<i class="bi bi-share"></i>
 								Edge
+							</button>
+
+							<button class="btn btn-outline-primary btn-sm" @onclick="Save">
+								<i class="bi bi-save"></i>
+								Save
 							</button>
 
 							<div class="toolbar-divider"></div>
@@ -35,8 +40,40 @@
 
 						<div class="toolbar-right">
 
-							<input class="form-control form-control-sm graph-search"
-								   placeholder="Search node..." />
+							<div class="node-search">
+								<div class="search-input-wrapper">
+									<i class="bi bi-search search-icon"></i>
+									<input type="text" class="search-input" placeholder="Search nodes..." value="@_searchQuery" @oninput="OnSearchInput" autocomplete="off" />
+									@if (!string.IsNullOrWhiteSpace(_searchQuery))
+									{
+										<button class="search-clear" @onclick="ClearSearch"> <i class="bi bi-x"></i> </button>
+									}
+								</div>
+								@if (_showSearchResults)
+								{
+									<div class="search-results">
+										@if (_searchResults.Count == 0)
+										{
+											<div class="search-no-results"> <i class="bi bi-search"></i> <span>No users found</span> </div>
+										}
+										else
+										{
+											@foreach (var result in _searchResults)
+											{
+												<button class="search-result" @onclick="() => SelectSearchResult(result.Id)">
+													<div class="search-result-icon">
+														<i class="bi bi-person"></i>
+													</div>
+													<div class="search-result-info">
+														<span class="search-result-name"> @result.Name </span>
+														<span class="search-result-id"> ID: @result.Id </span>
+													</div>
+												</button>
+											}
+										}
+									</div>
+								}
+							</div>
 
 						</div>
 
@@ -77,6 +114,64 @@
 									<span>@_selectedNode.Degree</span>
 								</div>
 
+								@if (_selectedNode.Friends?.Any() == true)
+								{
+									<div class="friends-section">
+										<div class="friends-list">
+											<div class="info-row">
+												<span>Friends :</span>
+											</div>
+											@foreach (var friend in _selectedNode.Friends)
+											{
+												<div class="friend-item">
+
+													<span>
+														@friend
+													</span>
+
+												</div>
+											}
+
+										</div>
+
+									</div>
+								}
+
+							</div>
+
+						</div>
+					}
+
+
+					@if (_showNodeMenu)
+					{
+						<div class="context-menu"
+							 style="left:@($"{_menuX}px"); top:@($"{_menuY}px");">
+
+							<div class="panel-header" style="margin :  0px !important;">
+
+								<div class="panel-title">
+
+									<span>Actions</span>
+
+								</div>
+
+								<button class="close-btn" @onclick="ClosePanel" style="width:10px!important;">
+									<i class="bi bi-x"></i>
+								</button>
+
+							</div>
+
+							<div style="padding: 10px;">
+								<a class="btn btn-warning" style="width:100%; margin-bottom:10px;" href="/UpdateNode/@_selectedNodeId">
+									<i class="bi bi-pencil-square"></i>
+									Update
+								</a>
+
+								<a class="btn btn-danger" style="width:100%;" @onclick="DeleteUser">
+									<i class="bi bi-trash"></i>
+									Delete
+								</a>
 							</div>
 
 						</div>

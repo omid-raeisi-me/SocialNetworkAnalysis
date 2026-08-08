@@ -5,6 +5,8 @@ using System.Text;
 using System.Threading.Tasks;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using SocialNetworkAnalysis.Application.Abstractions.Commands;
+using SocialNetworkAnalysis.Application.Abstractions.Queries;
 
 namespace SocialNetworkAnalysis.Application
 {

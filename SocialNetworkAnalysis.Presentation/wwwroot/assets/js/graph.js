@@ -1,9 +1,10 @@
-window.graph = {};
+﻿window.graph = {};
 
 window.graph.cy = null;
 
 window.graph.initialize = function () {
 
+    console.log("CYTOSCAPE INITIALIZED");
     window.graph.cy = cytoscape({
 
         container: document.getElementById("cy"),
@@ -158,7 +159,7 @@ window.graph.loadGraph = function (graph) {
         elements.push({
             data: {
                 id: user.id.toString(),
-                label: user.id + ". " + user.name
+                label: user.name
             }
         });
 
@@ -180,4 +181,220 @@ window.graph.loadGraph = function (graph) {
     cy.layout({
         name: "cose"
     }).run();
+};
+
+window.graph.highlightNode = function (nodeId, backgroundColor, borderColor) {
+
+    const cy = window.graph.cy;
+
+    const node = cy.getElementById(nodeId.toString());
+
+    if (node.length === 0)
+        return;
+
+
+    node.style({
+
+        "background-color": backgroundColor,
+
+        "border-color": borderColor,
+
+        "border-width": 5
+
+    });
+};
+
+window.graph.highlightEdge = function (source, target, color) {
+
+    const cy = window.graph.cy;
+
+
+    const edge = cy.edges().filter(function (ele) {
+
+        return (
+            ele.data("source") === source.toString() &&
+            ele.data("target") === target.toString()
+        )
+            ||
+            (
+                ele.data("source") === target.toString() &&
+                ele.data("target") === source.toString()
+            );
+
+    });
+
+
+    if (edge.length === 0)
+        return;
+
+
+    edge.style({
+
+        "line-color": color,
+
+        "width": 5
+
+    });
+};
+
+window.graph.registerNodeClick = function (dotNetReference) {
+
+    const cy = window.graph.cy;
+
+    cy.on("tap", "node", function (event) {
+
+        const node = event.target;
+
+        const position = node.renderedPosition();
+
+        const width = node.renderedOuterWidth();
+        const height = node.renderedOuterHeight();
+
+        const panelX = position.x - (width / 2);
+        const panelY = position.y - 20;
+
+        if (event.originalEvent.ctrlKey) {
+
+            dotNetReference.invokeMethodAsync(
+                "OpenNodeMenu",
+                parseInt(node.id()),
+                panelX + 90,
+                panelY
+            );
+
+            return;
+        }
+
+        if (event.originalEvent.shiftKey) {
+
+            dotNetReference.invokeMethodAsync(
+                "OnNodeClicked",
+                parseInt(node.id()),
+                panelX,
+                panelY
+            );
+
+            return;
+        }
+
+    });
+
+};
+
+window.graph.getNodeName = function (id) {
+
+    const cy = window.graph.cy;
+
+    const node = cy.getElementById(id.toString());
+
+    if (node.length === 0) {
+        return null;
+    }
+
+    return node.data("label");
+};
+
+window.graph.searchNodes = function (query) {
+
+    const cy = window.graph.cy;
+
+    if (!cy || !query) {
+        return [];
+    }
+
+    query = query.trim().toLowerCase();
+
+    if (!query) {
+        return [];
+    }
+
+    const results = [];
+
+    cy.nodes().forEach(node => {
+
+        const id = node.id();
+        const name = node.data("label") || "";
+
+        const idMatch =
+            id.toLowerCase() === query;
+
+        const nameMatch =
+            name.toLowerCase().includes(query);
+
+        if (idMatch || nameMatch) {
+
+            results.push({
+                id: parseInt(id),
+                name: name
+            });
+
+        }
+
+    });
+
+    results.sort((a, b) => {
+
+        const aExact =
+            a.id.toString().toLowerCase() === query;
+
+        const bExact =
+            b.id.toString().toLowerCase() === query;
+
+        if (aExact && !bExact)
+            return -1;
+
+        if (!aExact && bExact)
+            return 1;
+
+        const aNameExact =
+            a.name.toLowerCase() === query;
+
+        const bNameExact =
+            b.name.toLowerCase() === query;
+
+        if (aNameExact && !bNameExact)
+            return -1;
+
+        if (!aNameExact && bNameExact)
+            return 1;
+
+        return a.name.localeCompare(b.name);
+
+    });
+
+    return results.slice(0, 10);
+};
+
+
+window.graph.selectSearchNode = function (id) {
+
+    const cy = window.graph.cy;
+
+    if (!cy)
+        return false;
+
+    const node = cy.getElementById(id.toString());
+
+    if (!node || node.length === 0)
+        return false;
+
+    cy.elements().unselect();
+
+    node.select();
+
+    cy.animate({
+
+        center: {
+            eles: node
+        },
+
+        zoom: Math.max(cy.zoom(), 1.2)
+
+    }, {
+
+        duration: 400
+
+    });
+
+    return true;
 };

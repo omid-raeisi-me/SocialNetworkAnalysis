@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using SocialNetworkAnalysis.Application.Abstractions.Queries;
 
 namespace SocialNetworkAnalysis.Application.Services.Queries
 {
@@ -17,15 +18,16 @@ namespace SocialNetworkAnalysis.Application.Services.Queries
             _betweennessCentralityAlgorithm = betweennessCentralityAlgorithm;
         }
 
-        public BetweennessCentralityResponse Execute()
+        public BetweennessCentralityDto Execute()
         {
             return _runtime.ExecuteSnapshotAsync(graph =>
             {
-                var response = new BetweennessCentralityResponse();
+                var response = new BetweennessCentralityDto();
 
                 var coreResult = _betweennessCentralityAlgorithm.Execute(graph);
 
-                if (coreResult == null) return response;
+                if (coreResult == null)
+                    return response;
 
                 if (coreResult.mostInfluentialNodes != null)
                 {

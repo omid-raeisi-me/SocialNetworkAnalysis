@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using SocialNetworkAnalysis.Application.Abstractions.Queries;
 
 namespace SocialNetworkAnalysis.Application.Services.Queries
 {
@@ -17,11 +18,11 @@ namespace SocialNetworkAnalysis.Application.Services.Queries
             _communityDetectionAlgorithm = communityDetectionAlgorithm;
         }
 
-        public CommunityDetectionResponse Execute()
+        public CommunityDetectionDto Execute()
         {
             return _runtime.ExecuteSnapshotAsync(graph =>
             {
-                CommunityDetectionResponse response = new();
+                CommunityDetectionDto response = new();
 
                 var coreResult = _communityDetectionAlgorithm.Execute(graph);
 

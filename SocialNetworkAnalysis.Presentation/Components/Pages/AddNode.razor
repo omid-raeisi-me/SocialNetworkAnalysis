@@ -1,0 +1,65 @@
+﻿@page "/InsertNode"
+
+<div class="algorithm-panel collapsed" style="max-height:230px">
+
+	<div class="algorithm-header">
+
+		<div class="algorithm-info">
+
+			<div class="algorithm-icon">
+				<i class="bi bi-diagram-3-fill"></i>
+			</div>
+
+			<div>
+
+				<div class="algorithm-name">
+					Add Node
+				</div>
+
+			</div>
+
+		</div>
+
+		<div class="algorithm-actions">
+
+			<button class="panel-btn collapse-btn">
+
+				<i class="bi bi-chevron-up"></i>
+
+			</button>
+
+		</div>
+
+	</div>
+
+	<div class="algorithm-body">
+
+		<div class="algorithm-content">
+
+			<div class="panel-section">
+
+				<input class="form-control"
+					   placeholder="Name"
+					   @bind="_name"/>
+
+			</div>
+
+		</div>
+
+		<div class="algorithm-footer">
+
+			<button class="btn btn-primary w-100" @onclick="Add">
+
+				<i class="bi bi-lightning-charge"></i>
+
+				Add
+
+			</button>
+
+		</div>
+
+	</div>
+
+</div>
+
+<script src="/assets/js/pages.js"></script>

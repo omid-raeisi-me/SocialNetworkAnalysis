@@ -1,5 +1,5 @@
-﻿using SocialNetworkAnalysis.Application.Contracts.Runtime;
-using SocialNetworkAnalysis.Application.DTOs.Response;
+﻿using SocialNetworkAnalysis.Application.Abstractions.Queries;
+using SocialNetworkAnalysis.Application.Contracts.Runtime;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -17,11 +17,11 @@ namespace SocialNetworkAnalysis.Application.Services.Queries
             _runtime = runtime;
         }
 
-        public WholeGraphResponse Execute()
+        public WholeGraphDto Execute()
         {
             return _runtime.ExecuteRead(graph =>
             {
-                var response = new WholeGraphResponse();
+                var response = new WholeGraphDto();
 
                 foreach (var userId in graph.GetUsers())
                 {

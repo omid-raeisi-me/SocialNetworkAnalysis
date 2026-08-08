@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using SocialNetworkAnalysis.Application.Abstractions.Queries;
 
 namespace SocialNetworkAnalysis.Application.Services.Queries
 {
@@ -17,14 +18,15 @@ namespace SocialNetworkAnalysis.Application.Services.Queries
             _networkInformation = networkInformation;
         }
 
-        public NetworkInformationResponse Execute()
+        public NetworkInformationDto Execute()
         {
             return _runtime.ExecuteSnapshotAsync(graph =>
             {
                 var coreResult = _networkInformation.Execute(graph);
-                if (coreResult == null) return new NetworkInformationResponse();
+                if (coreResult == null)
+                    return new NetworkInformationDto();
 
-                var response = new NetworkInformationResponse
+                var response = new NetworkInformationDto
                 {
                     TotalUserCount = coreResult.TotalUserCount,
                     TotalFriendshipCount = coreResult.TotalFriendshipCount,

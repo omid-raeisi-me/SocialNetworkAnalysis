@@ -12,8 +12,4 @@
     <ProjectReference Include="..\SocialNetworkAnalysis.Infrastructure\SocialNetworkAnalysis.Infrastructure.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Data\" />
-  </ItemGroup>
-
 </Project>

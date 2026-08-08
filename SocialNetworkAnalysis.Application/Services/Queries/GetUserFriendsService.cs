@@ -9,7 +9,7 @@ namespace SocialNetworkAnalysis.Application.Services.Queries
     public class GetUserFriendsService : IGetUserFriendsService
     {
         private readonly IGraphRuntime _runtime;
-        private readonly IUserFriendsList _userFriendsList; 
+        private readonly IUserFriendsList _userFriendsList;
 
         public GetUserFriendsService(IGraphRuntime runtime, IUserFriendsList userFriendsList)
         {

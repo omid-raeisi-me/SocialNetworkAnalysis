@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using SocialNetworkAnalysis.Application.Abstractions.Commands;
+using SocialNetworkAnalysis.Application.Models;
 
 namespace SocialNetworkAnalysis.Application.Services.Commands
 {

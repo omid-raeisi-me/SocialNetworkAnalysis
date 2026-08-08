@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using SocialNetworkAnalysis.Application.Abstractions.Commands;
+using SocialNetworkAnalysis.Application.Models;
 
 namespace SocialNetworkAnalysis.Application.Services.Commands
 {
@@ -15,11 +17,13 @@ namespace SocialNetworkAnalysis.Application.Services.Commands
             _runtime = runtime;
         }
 
-        public void Execute(User user)
+        public void Execute(string name)
         {
+            var id = _runtime.GenerateId();
+
             _runtime.ExecuteWrite(graph =>
             {
-                graph.AddUser(user.Id, user.Name);
+                graph.AddUser(id, name);
             });
         }
     }

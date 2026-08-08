@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using SocialNetworkAnalysis.Application.Abstractions.Queries;
 
 namespace SocialNetworkAnalysis.Application.Services.Queries
 {
@@ -17,11 +18,11 @@ namespace SocialNetworkAnalysis.Application.Services.Queries
             _linkPrediction = linkPrediction;
         }
 
-        public FriendSuggestionResponse Execute(int userId, int topK = 5)
+        public FriendSuggestionDto Execute(int userId, int topK = 5)
         {
             return _runtime.ExecuteSnapshotAsync(graph =>
             {
-                FriendSuggestionResponse appResult = new();
+                FriendSuggestionDto appResult = new();
 
                 var coreResult = _linkPrediction.Execute(graph, userId, topK);
 

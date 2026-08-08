@@ -13,9 +13,9 @@ namespace SocialNetworkAnalysis.Infrastructure.Runtime
     public class GraphRuntime : IGraphRuntime
     {
         private SocialGraph _graph;
-        private int _nextId;
+        private int _lastId;
         private bool _graphChanged;
-        private bool _nextIdChanged;
+        private bool _settingsChanged;
 
         private ReaderWriterLockSlim _lock;
         private IGraphRepository _graphRepository;
@@ -27,13 +27,13 @@ namespace SocialNetworkAnalysis.Infrastructure.Runtime
             _graphRepository = graphRepository;
             _lock = new ReaderWriterLockSlim();
             _graphChanged = false;
-            _nextIdChanged = false;
+            _settingsChanged = false;
         }
 
         public async Task InitializeAsync()
         {
             _graph = await _graphRepository.GetGraphAsync()?? new SocialGraph();
-            _nextId = await _settingsRepository.GetLastIdAsync();
+            _lastId = await _settingsRepository.GetLastIdAsync();
         }
 
         public void ExecuteWrite(Action<SocialGraph> action)
@@ -105,17 +105,16 @@ namespace SocialNetworkAnalysis.Infrastructure.Runtime
                 await _graphRepository.SetGraphAsync(snapshot);
             }
 
-            if(_nextIdChanged)
+            if(_settingsChanged)
             {
-                int lastId = _nextId - 1;
-                await _settingsRepository.SetLastIdAsync(lastId);
+                await _settingsRepository.SetLastIdAsync(_lastId);
             }
         }
 
         public int GenerateId()
         {
-            _nextIdChanged = true;
-            return Interlocked.Increment(ref _nextId);
+            _settingsChanged = true;
+            return Interlocked.Increment(ref _lastId);
         }
     }
 }
