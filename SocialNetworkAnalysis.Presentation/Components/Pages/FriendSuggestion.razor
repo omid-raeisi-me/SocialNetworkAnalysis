@@ -1,0 +1,131 @@
+﻿@page "/FriendSuggestion/{Id:int}"
+
+<div class="algorithm-panel collapsed">
+
+	<div class="algorithm-header">
+
+		<div class="algorithm-info">
+
+			<div class="algorithm-icon">
+				<i class="bi bi-diagram-3-fill"></i>
+			</div>
+
+			<div>
+
+				<div class="algorithm-name">
+					Friend Suggestions
+				</div>
+
+			</div>
+
+		</div>
+
+		<div class="algorithm-actions">
+
+			<button class="panel-btn collapse-btn">
+
+				<i class="bi bi-chevron-up"></i>
+
+			</button>
+
+		</div>
+
+	</div>
+
+	<div class="algorithm-body">
+
+		<div class="algorithm-content">
+
+			<div class="panel-section">
+
+				<input class="form-control"
+					   placeholder="Top Number"
+					   @bind="_topNumber" />
+
+			</div>
+
+			@if (_friendSuggestionDto.CommonNeighbors?.Any() == true)
+			{
+				<div class="friends-section">
+					<div class="friends-list">
+						<div class="info-row">
+							<span>CommonNeighbors :</span>
+						</div>
+						@foreach (var item in _friendSuggestionDto.CommonNeighbors)
+						{
+							<div class="friend-item">
+
+								<span>
+									@($"{item.User.Id}. {item.User.Name} : {item.Score}")
+								</span>
+
+							</div>
+						}
+
+					</div>
+				</div>
+			}
+
+			@if (_friendSuggestionDto.AdamicAdar?.Any() == true)
+			{
+				<div class="friends-section">
+					<div class="friends-list">
+						<div class="info-row">
+							<span>AdamicAdar :</span>
+						</div>
+						@foreach (var item in _friendSuggestionDto.AdamicAdar)
+						{
+							<div class="friend-item">
+
+								<span>
+									@($"{item.User.Id}. {item.User.Name} : {item.Score}")
+								</span>
+
+							</div>
+						}
+
+					</div>
+				</div>
+			}
+
+			@if (_friendSuggestionDto.Jaccard?.Any() == true)
+			{
+				<div class="friends-section">
+					<div class="friends-list">
+						<div class="info-row">
+							<span>Jaccard :</span>
+						</div>
+						@foreach (var item in _friendSuggestionDto.Jaccard)
+						{
+							<div class="friend-item">
+
+								<span>
+									@($"{item.User.Id}. {item.User.Name} : {item.Score}")
+								</span>
+
+							</div>
+						}
+
+					</div>
+				</div>
+			}
+
+		</div>
+
+		<div class="algorithm-footer">
+
+			<button class="btn btn-primary w-100" @onclick="Run">
+
+				<i class="bi bi-play-fill"></i>
+
+				Run
+
+			</button>
+
+		</div>
+
+	</div>
+
+</div>
+
+<script src="/assets/js/pages.js"></script>
